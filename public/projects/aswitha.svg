@@ -1,0 +1,69 @@
+<svg width="600" height="360" viewBox="0 0 600 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="600" height="360" rx="16" fill="#081419"/>
+  
+  <!-- Browser Chrome Top Bar -->
+  <rect width="600" height="42" fill="#0c1d24"/>
+  <circle cx="24" cy="21" r="5" fill="#EF4444"/>
+  <circle cx="40" cy="21" r="5" fill="#F59E0B"/>
+  <circle cx="56" cy="21" r="5" fill="#10B981"/>
+  <rect x="80" y="12" width="220" height="18" rx="9" fill="#152f3a"/>
+  <text x="96" y="25" fill="#5eead4" font-family="'Space Grotesk', 'Poppins', sans-serif" font-size="11">https://aswithatech.tech</text>
+  
+  <!-- ERP Header Banner -->
+  <rect x="20" y="58" width="560" height="96" rx="12" fill="url(#aswitha-grad)"/>
+  <defs>
+    <linearGradient id="aswitha-grad" x1="0" y1="0" x2="560" y2="96" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0f766e"/>
+      <stop offset="0.5" stop-color="#115e59"/>
+      <stop offset="1" stop-color="#042f2e"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="40" y="74" width="36" height="36" rx="8" fill="#14b8a6"/>
+  <path d="M48 94 L54 82 L62 90 L70 78" stroke="#042f2e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <text x="88" y="93" fill="#ffffff" font-family="'Syne', 'Poppins', sans-serif" font-weight="800" font-size="19">ASWITHA TECH ERP</text>
+  <text x="88" y="114" fill="#ccfbf1" font-family="'Plus Jakarta Sans', sans-serif" font-size="12">Enterprise Resource Planning • Inventory, Finance &amp; CRM Suite</text>
+
+  <!-- Live Status Badge -->
+  <rect x="440" y="74" width="120" height="26" rx="13" fill="#042f2e" stroke="#2dd4bf" stroke-width="1.2"/>
+  <circle cx="454" cy="87" r="4" fill="#2dd4bf"/>
+  <text x="466" y="91" fill="#5eead4" font-family="'Space Grotesk', sans-serif" font-weight="600" font-size="11">Production ERP</text>
+
+  <!-- 4 KPI Cards -->
+  <rect x="20" y="168" width="130" height="74" rx="8" fill="#0d252e" stroke="#173e4d"/>
+  <text x="32" y="188" fill="#99f6e4" font-family="'Space Grotesk', sans-serif" font-size="10" font-weight="600">MONTHLY REVENUE</text>
+  <text x="32" y="214" fill="#ffffff" font-family="'Space Grotesk', sans-serif" font-size="18" font-weight="800">₹18.4 Lakhs</text>
+  <text x="32" y="232" fill="#34d399" font-family="'Space Grotesk', sans-serif" font-size="9">▲ +24.8% growth</text>
+
+  <rect x="163" y="168" width="130" height="74" rx="8" fill="#0d252e" stroke="#173e4d"/>
+  <text x="175" y="188" fill="#99f6e4" font-family="'Space Grotesk', sans-serif" font-size="10" font-weight="600">INVENTORY ITEMS</text>
+  <text x="175" y="214" fill="#ffffff" font-family="'Space Grotesk', sans-serif" font-size="18" font-weight="800">12,450 Units</text>
+  <text x="175" y="232" fill="#38bdf8" font-family="'Space Grotesk', sans-serif" font-size="9">Auto-reorder Active</text>
+
+  <rect x="306" y="168" width="130" height="74" rx="8" fill="#0d252e" stroke="#173e4d"/>
+  <text x="318" y="188" fill="#99f6e4" font-family="'Space Grotesk', sans-serif" font-size="10" font-weight="600">ACTIVE CLIENTS</text>
+  <text x="318" y="214" fill="#ffffff" font-family="'Space Grotesk', sans-serif" font-size="18" font-weight="800">340+ Accounts</text>
+  <text x="318" y="232" fill="#a78bfa" font-family="'Space Grotesk', sans-serif" font-size="9">99.4% SLA Compliance</text>
+
+  <rect x="450" y="168" width="130" height="74" rx="8" fill="#0d252e" stroke="#173e4d"/>
+  <text x="462" y="188" fill="#99f6e4" font-family="'Space Grotesk', sans-serif" font-size="10" font-weight="600">INVOICE AUDIT</text>
+  <text x="462" y="214" fill="#ffffff" font-family="'Space Grotesk', sans-serif" font-size="18" font-weight="800">GST Compliant</text>
+  <text x="462" y="232" fill="#2dd4bf" font-family="'Space Grotesk', sans-serif" font-size="9">Automated E-way Bills</text>
+
+  <!-- Lower Table / Chart Preview -->
+  <rect x="20" y="254" width="560" height="86" rx="8" fill="#0d252e" stroke="#173e4d"/>
+  <!-- Row 1 -->
+  <circle cx="40" cy="278" r="6" fill="#14b8a6"/>
+  <text x="56" y="282" fill="#ffffff" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="600">Automated Dispatch Batch #8941</text>
+  <text x="320" y="282" fill="#99f6e4" font-family="'Space Grotesk', sans-serif" font-size="11">Industrial Heavy Equipment</text>
+  <rect x="480" y="268" width="84" height="20" rx="4" fill="#042f2e" stroke="#14b8a6"/>
+  <text x="496" y="282" fill="#2dd4bf" font-family="'Space Grotesk', sans-serif" font-size="10" font-weight="700">COMPLETED</text>
+
+  <!-- Row 2 -->
+  <circle cx="40" cy="314" r="6" fill="#f59e0b"/>
+  <text x="56" y="318" fill="#ffffff" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="600">Material Procurement Order #8942</text>
+  <text x="320" y="318" fill="#99f6e4" font-family="'Space Grotesk', sans-serif" font-size="11">Raw Aluminum Alloy</text>
+  <rect x="480" y="304" width="84" height="20" rx="4" fill="#451a03" stroke="#f59e0b"/>
+  <text x="500" y="318" fill="#fbbf24" font-family="'Space Grotesk', sans-serif" font-size="10" font-weight="700">PROCESSING</text>
+</svg>

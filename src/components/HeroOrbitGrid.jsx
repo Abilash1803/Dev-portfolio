@@ -174,7 +174,7 @@ const orbitsData = [
 
 export const HeroOrbitGrid = () => {
   return (
-    <div className="relative w-[340px] h-[340px] sm:w-[480px] sm:h-[480px] lg:w-[560px] lg:h-[560px] flex items-center justify-center select-none scale-[0.72] xs:scale-[0.8] sm:scale-[0.92] lg:scale-100 transition-transform">
+    <div className="relative w-[280px] h-[280px] xs:w-[330px] xs:h-[330px] sm:w-[460px] sm:h-[460px] lg:w-[560px] lg:h-[560px] flex items-center justify-center select-none scale-[0.52] xs:scale-[0.62] sm:scale-[0.84] lg:scale-100 origin-center transition-transform duration-300">
       {/* Deep Space Celestial Nebula Backdrop */}
       <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-purple-900/20 via-transparent to-cyan-500/15 blur-3xl pointer-events-none" />
 

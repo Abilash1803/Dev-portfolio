@@ -1,0 +1,64 @@
+<svg width="600" height="360" viewBox="0 0 600 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="600" height="360" rx="16" fill="#13081a"/>
+  
+  <!-- Browser Chrome Top Bar -->
+  <rect width="600" height="42" fill="#1e0c29"/>
+  <circle cx="24" cy="21" r="5" fill="#EF4444"/>
+  <circle cx="40" cy="21" r="5" fill="#F59E0B"/>
+  <circle cx="56" cy="21" r="5" fill="#10B981"/>
+  <rect x="80" y="12" width="200" height="18" rx="9" fill="#321445"/>
+  <text x="96" y="25" fill="#f472b6" font-family="'Space Grotesk', 'Poppins', sans-serif" font-size="11">https://tikytop.com</text>
+  
+  <!-- TikyTop Header Banner -->
+  <rect x="20" y="58" width="560" height="96" rx="12" fill="url(#tikytop-grad)"/>
+  <defs>
+    <linearGradient id="tikytop-grad" x1="0" y1="0" x2="560" y2="96" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#be185d"/>
+      <stop offset="0.5" stop-color="#831843"/>
+      <stop offset="1" stop-color="#2e0854"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Glowing Rocket / Boost Icon -->
+  <rect x="40" y="74" width="36" height="36" rx="8" fill="#ec4899"/>
+  <path d="M58 78 C64 82 66 90 62 96 L58 92 L54 96 C50 90 52 82 58 78 Z" fill="#ffffff"/>
+  
+  <text x="88" y="93" fill="#ffffff" font-family="'Syne', 'Poppins', sans-serif" font-weight="800" font-size="19">TIKYTOP • SOCIAL BOOSTER</text>
+  <text x="88" y="114" fill="#fbcfe8" font-family="'Plus Jakarta Sans', sans-serif" font-size="12">Next-Gen Account Amplification • Real Engagement Analytics &amp; Growth</text>
+
+  <!-- Live Status Badge -->
+  <rect x="440" y="74" width="120" height="26" rx="13" fill="#4a044e" stroke="#f472b6" stroke-width="1.2"/>
+  <circle cx="454" cy="87" r="4" fill="#f43f5e"/>
+  <text x="466" y="91" fill="#fbcfe8" font-family="'Space Grotesk', sans-serif" font-weight="600" font-size="11">⚡ Instant Delivery</text>
+
+  <!-- 3 Performance Boost Cards -->
+  <rect x="20" y="168" width="174" height="172" rx="10" fill="#200d2b" stroke="#3d1554"/>
+  <rect x="32" y="180" width="8" height="8" rx="4" fill="#ec4899"/>
+  <text x="46" y="188" fill="#ffffff" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="12">TIKTOK GROWTH</text>
+  <rect x="32" y="202" width="150" height="56" rx="6" fill="#2d133d"/>
+  <text x="42" y="222" fill="#ffffff" font-family="'Plus Jakarta Sans', sans-serif" font-weight="600" font-size="11">Viral Algorithm Boost</text>
+  <text x="42" y="242" fill="#f472b6" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="13">+450% ForYou Reach</text>
+  <rect x="32" y="268" width="150" height="56" rx="6" fill="#2d133d"/>
+  <text x="42" y="288" fill="#ffffff" font-family="'Plus Jakarta Sans', sans-serif" font-weight="600" font-size="11">Authentic Watch Time</text>
+  <text x="42" y="306" fill="#34d399" font-family="'Space Grotesk', sans-serif" font-size="10">Automated Drip Delivery</text>
+
+  <rect x="213" y="168" width="174" height="172" rx="10" fill="#200d2b" stroke="#3d1554"/>
+  <rect x="225" y="180" width="8" height="8" rx="4" fill="#a855f7"/>
+  <text x="239" y="188" fill="#ffffff" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="12">INSTAGRAM HUB</text>
+  <rect x="225" y="202" width="150" height="56" rx="6" fill="#2d133d"/>
+  <text x="235" y="222" fill="#ffffff" font-family="'Plus Jakarta Sans', sans-serif" font-weight="600" font-size="11">Reels Visibility Surge</text>
+  <text x="235" y="242" fill="#c084fc" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="13">High Retention Fans</text>
+  <rect x="225" y="268" width="150" height="56" rx="6" fill="#2d133d"/>
+  <text x="235" y="288" fill="#ffffff" font-family="'Plus Jakarta Sans', sans-serif" font-weight="600" font-size="11">Profile Visits</text>
+  <text x="235" y="306" fill="#38bdf8" font-family="'Space Grotesk', sans-serif" font-size="10">Real-Time Heatmap</text>
+
+  <rect x="406" y="168" width="174" height="172" rx="10" fill="#200d2b" stroke="#3d1554"/>
+  <rect x="418" y="180" width="8" height="8" rx="4" fill="#06b6d4"/>
+  <text x="432" y="188" fill="#ffffff" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="12">ORDER METRICS</text>
+  <rect x="418" y="202" width="150" height="56" rx="6" fill="#2d133d"/>
+  <text x="428" y="222" fill="#ffffff" font-family="'Plus Jakarta Sans', sans-serif" font-weight="600" font-size="11">Processed Orders</text>
+  <text x="428" y="242" fill="#22d3ee" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="14">84,500+ Fulfilled</text>
+  <rect x="418" y="268" width="150" height="56" rx="6" fill="#2d133d"/>
+  <text x="428" y="288" fill="#ffffff" font-family="'Plus Jakarta Sans', sans-serif" font-weight="600" font-size="11">Security Protocol</text>
+  <text x="428" y="308" fill="#10b981" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="12">100% Ban-Free Guard</text>
+</svg>

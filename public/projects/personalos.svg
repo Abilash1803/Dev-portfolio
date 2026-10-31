@@ -1,0 +1,90 @@
+<svg width="600" height="360" viewBox="0 0 600 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="600" height="360" rx="16" fill="#090a12"/>
+  
+  <!-- Browser Chrome Top Bar -->
+  <rect width="600" height="42" fill="#111320"/>
+  <circle cx="24" cy="21" r="5" fill="#EF4444"/>
+  <circle cx="40" cy="21" r="5" fill="#F59E0B"/>
+  <circle cx="56" cy="21" r="5" fill="#10B981"/>
+  <rect x="80" y="12" width="220" height="18" rx="9" fill="#1c2035"/>
+  <text x="96" y="25" fill="#c084fc" font-family="'Space Grotesk', 'Poppins', sans-serif" font-size="11">personal-os.app // habit-matrix</text>
+  
+  <!-- PersonalOS Header Banner -->
+  <rect x="20" y="58" width="560" height="96" rx="12" fill="url(#personal-grad)"/>
+  <defs>
+    <linearGradient id="personal-grad" x1="0" y1="0" x2="560" y2="96" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4c1d95"/>
+      <stop offset="0.6" stop-color="#2e1065"/>
+      <stop offset="1" stop-color="#090a12"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="40" y="74" width="36" height="36" rx="8" fill="#8b5cf6"/>
+  <!-- Target / Flame Icon -->
+  <circle cx="58" cy="92" r="10" stroke="#ffffff" stroke-width="2.5" fill="none"/>
+  <circle cx="58" cy="92" r="4" fill="#f59e0b"/>
+  
+  <text x="88" y="93" fill="#ffffff" font-family="'Syne', 'Poppins', sans-serif" font-weight="800" font-size="19">PERSONAL OS • HABIT TRACKER</text>
+  <text x="88" y="114" fill="#ddd6fe" font-family="'Plus Jakarta Sans', sans-serif" font-size="12">Daily Life Operating System • Streak Mastery, Focus Analytics &amp; Micro-Routines</text>
+
+  <!-- Streak Badge -->
+  <rect x="430" y="74" width="130" height="26" rx="13" fill="#451a03" stroke="#f59e0b" stroke-width="1.2"/>
+  <circle cx="444" cy="87" r="4" fill="#f59e0b"/>
+  <text x="456" y="91" fill="#fde68a" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="11">🔥 42 Day Streak</text>
+
+  <!-- Habit Tracker Matrix Cards -->
+  <!-- Habit 1: Deep Work -->
+  <rect x="20" y="168" width="174" height="172" rx="10" fill="#121424" stroke="#222642"/>
+  <text x="32" y="190" fill="#ffffff" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" font-size="12">Deep Coding Focus</text>
+  <text x="32" y="208" fill="#a78bfa" font-family="'Space Grotesk', sans-serif" font-size="11">Target: 4.5 hrs / day</text>
+  <!-- Mini matrix dots -->
+  <g fill="#8b5cf6">
+    <rect x="32" y="222" width="16" height="16" rx="3"/>
+    <rect x="52" y="222" width="16" height="16" rx="3"/>
+    <rect x="72" y="222" width="16" height="16" rx="3"/>
+    <rect x="92" y="222" width="16" height="16" rx="3"/>
+    <rect x="112" y="222" width="16" height="16" rx="3"/>
+    <rect x="132" y="222" width="16" height="16" rx="3"/>
+    <rect x="152" y="222" width="16" height="16" rx="3"/>
+  </g>
+  <text x="32" y="260" fill="#34d399" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="12">98% Weekly Score</text>
+  <rect x="32" y="278" width="150" height="8" rx="4" fill="#222642"/>
+  <rect x="32" y="278" width="144" height="8" rx="4" fill="#8b5cf6"/>
+  <text x="32" y="312" fill="#94a3b8" font-family="'Space Grotesk', sans-serif" font-size="10">Active Flow State</text>
+
+  <!-- Habit 2: Fitness & Health -->
+  <rect x="213" y="168" width="174" height="172" rx="10" fill="#121424" stroke="#222642"/>
+  <text x="225" y="190" fill="#ffffff" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" font-size="12">Fitness &amp; Workout</text>
+  <text x="225" y="208" fill="#38bdf8" font-family="'Space Grotesk', sans-serif" font-size="11">Strength &amp; Calisthenics</text>
+  <g fill="#0ea5e9">
+    <rect x="225" y="222" width="16" height="16" rx="3"/>
+    <rect x="245" y="222" width="16" height="16" rx="3"/>
+    <rect x="265" y="222" width="16" height="16" rx="3"/>
+    <rect x="285" y="222" width="16" height="16" rx="3"/>
+    <rect x="305" y="222" width="16" height="16" rx="3"/>
+    <rect x="325" y="222" width="16" height="16" rx="3" fill="#222642"/>
+    <rect x="345" y="222" width="16" height="16" rx="3"/>
+  </g>
+  <text x="225" y="260" fill="#38bdf8" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="12">6 / 7 Days Done</text>
+  <rect x="225" y="278" width="150" height="8" rx="4" fill="#222642"/>
+  <rect x="225" y="278" width="128" height="8" rx="4" fill="#0ea5e9"/>
+  <text x="225" y="312" fill="#94a3b8" font-family="'Space Grotesk', sans-serif" font-size="10">Strength Peak</text>
+
+  <!-- Habit 3: Daily Reading & Research -->
+  <rect x="406" y="168" width="174" height="172" rx="10" fill="#121424" stroke="#222642"/>
+  <text x="418" y="190" fill="#ffffff" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" font-size="12">Books &amp; Tech Papers</text>
+  <text x="418" y="208" fill="#f59e0b" font-family="'Space Grotesk', sans-serif" font-size="11">30 Pages Every Evening</text>
+  <g fill="#f59e0b">
+    <rect x="418" y="222" width="16" height="16" rx="3"/>
+    <rect x="438" y="222" width="16" height="16" rx="3"/>
+    <rect x="458" y="222" width="16" height="16" rx="3"/>
+    <rect x="478" y="222" width="16" height="16" rx="3"/>
+    <rect x="498" y="222" width="16" height="16" rx="3"/>
+    <rect x="518" y="222" width="16" height="16" rx="3"/>
+    <rect x="538" y="222" width="16" height="16" rx="3"/>
+  </g>
+  <text x="418" y="260" fill="#fbbf24" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="12">100% Unbroken</text>
+  <rect x="418" y="278" width="150" height="8" rx="4" fill="#222642"/>
+  <rect x="418" y="278" width="150" height="8" rx="4" fill="#f59e0b"/>
+  <text x="418" y="312" fill="#94a3b8" font-family="'Space Grotesk', sans-serif" font-size="10">System Architecture</text>
+</svg>

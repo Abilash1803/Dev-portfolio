@@ -56,11 +56,11 @@ export const Projects = () => {
               >
                 <div>
                   {/* Image Container with Top-Right Floating Action Buttons */}
-                  <div className="relative w-full h-[220px] rounded-2xl overflow-hidden bg-[#151030]">
+                  <div className="relative w-full h-[220px] rounded-2xl overflow-hidden bg-[#151030] group/img">
                     <img
                       src={project.image}
                       alt={project.title}
-                      className="w-full h-full object-cover rounded-2xl"
+                      className="w-full h-full object-cover rounded-2xl group-hover/img:scale-105 transition-transform duration-500"
                     />
 
                     {/* Top Right Floating Action Icons */}
@@ -70,7 +70,7 @@ export const Projects = () => {
                         href={project.source_code_link}
                         target="_blank"
                         rel="noreferrer"
-                        className="w-9 h-9 rounded-full bg-[#050816]/90 border border-white/20 hover:border-[#915EFF] flex items-center justify-center text-white backdrop-blur-md shadow-md transition-all hover:scale-110"
+                        className="w-9 h-9 rounded-full bg-[#050816]/90 border border-white/20 hover:border-[#915EFF] flex items-center justify-center text-white backdrop-blur-md shadow-md transition-all hover:scale-110 cursor-pointer"
                         title="View Source Code"
                       >
                         <GithubIcon className="w-4 h-4" />
@@ -82,7 +82,7 @@ export const Projects = () => {
                           href={project.live_link}
                           target="_blank"
                           rel="noreferrer"
-                          className="w-9 h-9 rounded-full bg-[#050816]/90 border border-white/20 hover:border-[#00cea8] flex items-center justify-center text-[#00cea8] backdrop-blur-md shadow-md transition-all hover:scale-110"
+                          className="w-9 h-9 rounded-full bg-[#050816]/90 border border-white/20 hover:border-[#00cea8] flex items-center justify-center text-[#00cea8] backdrop-blur-md shadow-md transition-all hover:scale-110 cursor-pointer"
                           title="Open Live Website"
                         >
                           <ExternalLink className="w-4 h-4" />
@@ -93,21 +93,27 @@ export const Projects = () => {
 
                   {/* Title & Description */}
                   <div className="mt-5">
-                    <h3 className="text-white font-bold text-[22px] tracking-tight hover:text-[#915EFF] transition-colors">
-                      {project.title}
+                    <h3 className="text-white font-display font-bold text-[22px] tracking-tight hover:text-[#915EFF] transition-colors">
+                      {project.isLive ? (
+                        <a href={project.live_link} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 hover:underline">
+                          <span>{project.title}</span>
+                        </a>
+                      ) : (
+                        project.title
+                      )}
                     </h3>
-                    <p className="mt-2 text-[#aaa6c3] text-[14px] leading-relaxed line-clamp-4">
+                    <p className="mt-2 text-[#aaa6c3] font-body text-[14px] leading-relaxed line-clamp-4">
                       {project.description}
                     </p>
                   </div>
                 </div>
 
                 {/* Hashtags */}
-                <div className="mt-5 flex flex-wrap gap-2 pt-3 border-t border-white/5">
+                <div className="mt-5 flex flex-wrap gap-2 pt-3 border-t border-white/5 font-tech">
                   {project.tags.map((tag) => (
                     <span
                       key={`${project.id}-${tag.name}`}
-                      className={`text-[13px] font-semibold ${tag.color}`}
+                      className={`text-[12px] font-semibold tracking-wide ${tag.color}`}
                     >
                       #{tag.name}
                     </span>
