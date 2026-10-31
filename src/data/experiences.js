@@ -3,7 +3,8 @@ export const experiences = [
     title: 'Junior Full Stack Developer',
     company_name: 'Madhura Technologies Pvt Ltd',
     icon_initials: 'MT',
-    iconBg: '#383E56',
+    icon: '/assets/madhura-logo.png',
+    iconBg: '#facc15',
     date: 'Feb 2026 - Present',
     points: [
       'Own end-to-end development of Chakrika Sarees, a live e-commerce platform, from UI design to production deployment.',
@@ -16,7 +17,8 @@ export const experiences = [
     title: 'Full Stack Development (MERN)',
     company_name: 'Vetri Nichayam Scheme',
     icon_initials: 'VN',
-    iconBg: '#E6DEDD',
+    icon: '/assets/tamilnadu-logo.svg',
+    iconBg: '#ffffff',
     date: 'Oct 2025 - Jan 2026',
     points: [
       'Completed intensive MERN stack training covering React, Node.js, Express and MongoDB.',
@@ -27,7 +29,7 @@ export const experiences = [
     title: 'Frontend Developer',
     company_name: 'Zigma Business Solutions',
     icon_initials: 'ZB',
-    iconBg: '#383E56',
+    iconBg: '#151030',
     date: 'Dec 2024 - Sep 2025',
     points: [
       'Developed responsive React and Tailwind interfaces for JMRH, a research journal platform for academic users.',

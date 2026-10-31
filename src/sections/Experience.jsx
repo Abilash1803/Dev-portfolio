@@ -45,14 +45,23 @@ export const Experience = () => {
               date={experience.date}
               dateClassName="text-white font-semibold text-[15px] sm:text-[16px] mx-3 my-auto drop-shadow-sm"
               iconStyle={{
-                background: '#151030',
+                background: experience.iconBg || '#151030',
                 color: '#fff',
                 boxShadow: '0 0 20px rgba(145, 94, 255, 0.7)',
                 border: '3px solid #915EFF',
+                overflow: 'hidden',
               }}
               icon={
                 <div className="flex justify-center items-center w-full h-full font-bold font-mono text-sm tracking-tighter text-[#00cea8]">
-                  {experience.icon_initials}
+                  {experience.icon ? (
+                    <img
+                      src={experience.icon}
+                      alt={experience.company_name}
+                      className="w-[82%] h-[82%] object-contain rounded-full"
+                    />
+                  ) : (
+                    experience.icon_initials
+                  )}
                 </div>
               }
             >
