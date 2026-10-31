@@ -1,0 +1,45 @@
+<svg width="600" height="360" viewBox="0 0 600 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="600" height="360" rx="16" fill="#0b1329"/>
+  <!-- Top bar -->
+  <rect width="600" height="42" fill="#132042"/>
+  <circle cx="24" cy="21" r="5" fill="#EF4444"/>
+  <circle cx="40" cy="21" r="5" fill="#F59E0B"/>
+  <circle cx="56" cy="21" r="5" fill="#10B981"/>
+  <rect x="80" y="12" width="220" height="18" rx="9" fill="#1e3264"/>
+  <text x="96" y="25" fill="#93c5fd" font-family="'Poppins', sans-serif" font-size="11">https://www.jmrh.in</text>
+  
+  <!-- Journal Header -->
+  <rect x="20" y="58" width="560" height="90" rx="12" fill="url(#jmrh-grad)"/>
+  <defs>
+    <linearGradient id="jmrh-grad" x1="0" y1="0" x2="560" y2="90" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1e3a8a"/>
+      <stop offset="1" stop-color="#0f172a"/>
+    </linearGradient>
+  </defs>
+  
+  <text x="40" y="92" fill="#38bdf8" font-family="'Poppins', sans-serif" font-weight="800" font-size="20">JMRH | Journal of Multidisciplinary Research &amp; Healthcare</text>
+  <text x="40" y="118" fill="#94a3b8" font-family="'Poppins', sans-serif" font-size="12">Open Access, Peer-Reviewed International Research Journal • ISSN Indexed</text>
+
+  <!-- Filter tabs -->
+  <rect x="20" y="160" width="120" height="28" rx="6" fill="#2563eb"/>
+  <text x="35" y="178" fill="#ffffff" font-family="'Poppins', sans-serif" font-weight="600" font-size="11">Current Issue</text>
+
+  <rect x="150" y="160" width="110" height="28" rx="6" fill="#1e293b"/>
+  <text x="165" y="178" fill="#94a3b8" font-family="'Poppins', sans-serif" font-size="11">Archive (Vol 5)</text>
+
+  <rect x="270" y="160" width="120" height="28" rx="6" fill="#1e293b"/>
+  <text x="285" y="178" fill="#94a3b8" font-family="'Poppins', sans-serif" font-size="11">Submit Paper</text>
+
+  <!-- Articles List -->
+  <rect x="20" y="200" width="560" height="66" rx="8" fill="#111c38" stroke="#1e2e5c"/>
+  <text x="36" y="224" fill="#67e8f9" font-family="'Poppins', sans-serif" font-weight="600" font-size="12">Machine Learning Approaches in Non-Invasive Clinical Diagnostics</text>
+  <text x="36" y="244" fill="#94a3b8" font-family="'Poppins', sans-serif" font-size="11">Dr. S. Ramanathan, et al. • Vol 5, Issue 2 • DOI: 10.3248/jmrh.2025.04</text>
+  <rect x="500" y="214" width="64" height="26" rx="4" fill="#0284c7"/>
+  <text x="515" y="231" fill="#ffffff" font-family="'Poppins', sans-serif" font-weight="600" font-size="11">PDF</text>
+
+  <rect x="20" y="276" width="560" height="66" rx="8" fill="#111c38" stroke="#1e2e5c"/>
+  <text x="36" y="300" fill="#67e8f9" font-family="'Poppins', sans-serif" font-weight="600" font-size="12">Sustainable Tele-Health Frameworks for Rural Primary Care</text>
+  <text x="36" y="320" fill="#94a3b8" font-family="'Poppins', sans-serif" font-size="11">Prof. A. Mehra, K. Varma • Vol 5, Issue 2 • DOI: 10.3248/jmrh.2025.05</text>
+  <rect x="500" y="290" width="64" height="26" rx="4" fill="#0284c7"/>
+  <text x="515" y="307" fill="#ffffff" font-family="'Poppins', sans-serif" font-weight="600" font-size="11">PDF</text>
+</svg>

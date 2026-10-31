@@ -1,0 +1,173 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #050816;
+  --color-secondary: #aaa6c3;
+  --color-tertiary: #151030;
+  --color-card: #100d25;
+  --color-accent-purple: #915EFF;
+  --color-black-100: #100d25;
+  --color-black-200: #090325;
+  --color-white-100: #f3f3f3;
+  --font-poppins: 'Poppins', sans-serif;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    color-scheme: dark;
+    background-color: #050816;
+    color: #ffffff;
+  }
+
+  body {
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    background-color: #050816;
+    color: #ffffff;
+  }
+}
+
+@media print {
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+}
+
+/* Subtle Vertical Grid Lines Overlay */
+.grid-lines-bg {
+  background-size: 80px 80px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+}
+
+/* Gradients */
+.violet-gradient {
+  background: #804dee;
+  background: linear-gradient(-90deg, #804dee 0%, rgba(60, 51, 80, 0) 100%);
+  background: -webkit-linear-gradient(-90deg, #804dee 0%, rgba(60, 51, 80, 0) 100%);
+}
+
+.green-pink-gradient {
+  background: linear-gradient(90.13deg, #00cea8 1.9%, #bf61ff 97.5%);
+}
+
+.teal-purple-gradient-border {
+  background: linear-gradient(135deg, #00cea8 0%, #915EFF 100%);
+}
+
+.card-glow {
+  box-shadow: 0 0 25px -5px rgba(145, 94, 255, 0.15);
+}
+
+.card-glow-hover:hover {
+  box-shadow: 0 0 30px 2px rgba(145, 94, 255, 0.25);
+}
+
+.blue-text-gradient {
+  background: linear-gradient(to right, #00c6ff, #0072ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.green-text-gradient {
+  background: linear-gradient(to right, #11998e, #38ef7d);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.pink-text-gradient {
+  background: linear-gradient(to right, #ec008c, #fc67fa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.purple-text-gradient {
+  background: linear-gradient(to right, #c084fc, #915EFF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #050816;
+}
+::-webkit-scrollbar-thumb {
+  background: #231b42;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #915EFF;
+}
+
+/* Vertical Timeline custom overrides matching reference PDF */
+.vertical-timeline::before {
+  background: rgba(255, 255, 255, 0.45) !important;
+  width: 2px !important;
+}
+
+.vertical-timeline-element-content {
+  box-shadow: 0 8px 30px -4px rgba(0, 0, 0, 0.7) !important;
+  border: 1px solid rgba(145, 94, 255, 0.3) !important;
+  background: #1d1836 !important;
+  color: #ffffff !important;
+  border-radius: 16px !important;
+}
+
+.vertical-timeline-element-content-arrow {
+  border-right: 8px solid #1d1836 !important;
+}
+
+/* Animation utilities */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(1deg);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.05);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 4s ease-in-out infinite;
+}
+
+@keyframes spinSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spinSlow 30s linear infinite;
+}

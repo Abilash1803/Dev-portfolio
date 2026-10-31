@@ -1,0 +1,46 @@
+<svg width="600" height="360" viewBox="0 0 600 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="600" height="360" rx="16" fill="#13091e"/>
+  <!-- Top bar -->
+  <rect width="600" height="42" fill="#1c0f2b"/>
+  <circle cx="24" cy="21" r="5" fill="#EF4444"/>
+  <circle cx="40" cy="21" r="5" fill="#F59E0B"/>
+  <circle cx="56" cy="21" r="5" fill="#10B981"/>
+  <rect x="80" y="12" width="280" height="18" rx="9" fill="#2d1b44"/>
+  <text x="96" y="25" fill="#a78bfa" font-family="'Poppins', sans-serif" font-size="11">https://chakrikasarees.com</text>
+  
+  <!-- Hero banner -->
+  <rect x="20" y="58" width="560" height="130" rx="12" fill="url(#hero-grad)"/>
+  <defs>
+    <linearGradient id="hero-grad" x1="0" y1="0" x2="560" y2="130" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4a154b"/>
+      <stop offset="0.5" stop-color="#701a75"/>
+      <stop offset="1" stop-color="#31103f"/>
+    </linearGradient>
+  </defs>
+  
+  <text x="44" y="98" fill="#fde047" font-family="'Poppins', sans-serif" font-weight="800" font-size="22">CHAKRIKA SAREES</text>
+  <text x="44" y="122" fill="#e9d5ff" font-family="'Poppins', sans-serif" font-size="13">Handcrafted Heritage Silks &amp; Festive Weaves</text>
+  
+  <rect x="44" y="140" width="130" height="30" rx="15" fill="#f59e0b"/>
+  <text x="64" y="160" fill="#451a03" font-family="'Poppins', sans-serif" font-weight="700" font-size="12">SHOP COLLECTION</text>
+
+  <!-- Razorpay / Live badge -->
+  <rect x="420" y="74" width="140" height="26" rx="6" fill="#032b43" stroke="#00b4d8" stroke-width="1.5"/>
+  <text x="432" y="91" fill="#90e0ef" font-family="'Poppins', sans-serif" font-weight="600" font-size="11">⚡ Razorpay Verified</text>
+  
+  <!-- Product Cards Grid -->
+  <rect x="20" y="204" width="170" height="136" rx="10" fill="#241437" stroke="#3b1d5c"/>
+  <rect x="32" y="214" width="146" height="70" rx="6" fill="#4c1d6b"/>
+  <text x="32" y="302" fill="#ffffff" font-family="'Poppins', sans-serif" font-weight="600" font-size="12">Kanjivaram Silk</text>
+  <text x="32" y="322" fill="#f59e0b" font-family="'Poppins', sans-serif" font-weight="700" font-size="13">₹4,999</text>
+
+  <rect x="215" y="204" width="170" height="136" rx="10" fill="#241437" stroke="#3b1d5c"/>
+  <rect x="227" y="214" width="146" height="70" rx="6" fill="#581c87"/>
+  <text x="227" y="302" fill="#ffffff" font-family="'Poppins', sans-serif" font-weight="600" font-size="12">Banarasi Brocade</text>
+  <text x="227" y="322" fill="#f59e0b" font-family="'Poppins', sans-serif" font-weight="700" font-size="13">₹6,499</text>
+
+  <rect x="410" y="204" width="170" height="136" rx="10" fill="#241437" stroke="#3b1d5c"/>
+  <rect x="422" y="214" width="146" height="70" rx="6" fill="#6b21a8"/>
+  <text x="422" y="302" fill="#ffffff" font-family="'Poppins', sans-serif" font-weight="600" font-size="12">Chanderi Pure</text>
+  <text x="422" y="322" fill="#f59e0b" font-family="'Poppins', sans-serif" font-weight="700" font-size="13">₹3,299</text>
+</svg>
