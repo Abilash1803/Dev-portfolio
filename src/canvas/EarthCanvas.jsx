@@ -14,14 +14,16 @@ function createStarNodeTexture() {
   const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
   gradient.addColorStop(0, '#ffffff');
   gradient.addColorStop(0.2, 'rgba(255, 255, 255, 1)');
-  gradient.addColorStop(0.45, 'rgba(56, 189, 248, 0.95)');
-  gradient.addColorStop(0.75, 'rgba(37, 99, 235, 0.45)');
+  gradient.addColorStop(0.42, 'rgba(56, 189, 248, 0.98)');
+  gradient.addColorStop(0.72, 'rgba(14, 165, 233, 0.55)');
   gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
 
   ctx.fillStyle = gradient;
   ctx.fillRect(0, 0, 64, 64);
 
-  return new THREE.CanvasTexture(canvas);
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.needsUpdate = true;
+  return texture;
 }
 
 const RealNeonEarth = ({ onHoverCity, onLeaveCity }) => {
@@ -162,18 +164,25 @@ const RealNeonEarth = ({ onHoverCity, onLeaveCity }) => {
     return new Float32Array(allArcCoords);
   }, []);
 
-  // 9. Initial Energy Packets buffer for traveling photons along cyber arcs
+  // 9. Initial Energy Packets pre-distributed along arcs so they glow immediately on frame 0
   const packetPositions = useMemo(() => {
-    return new Float32Array(realEarthData.arcs.length * 3);
+    const arcs = realEarthData.arcs;
+    const pos = new Float32Array(arcs.length * 3);
+    for (let i = 0; i < arcs.length; i++) {
+      const pts = arcs[i].points;
+      const totalPoints = pts.length / 3;
+      const progress = (i * 0.17) % 1;
+      const index = Math.floor(progress * (totalPoints - 1));
+      pos[i * 3] = pts[index * 3];
+      pos[i * 3 + 1] = pts[index * 3 + 1];
+      pos[i * 3 + 2] = pts[index * 3 + 2];
+    }
+    return pos;
   }, []);
 
-  // Animation Loop: natural axial rotation + traveling energy packets
+  // Animation Loop: traveling energy packets along the cyber arcs
   useFrame((state) => {
     const time = state.clock.getElapsedTime();
-
-    if (groupRef.current) {
-      groupRef.current.rotation.y += 0.0022;
-    }
 
     if (packetPointsRef.current) {
       const arcs = realEarthData.arcs;
@@ -230,8 +239,8 @@ const RealNeonEarth = ({ onHoverCity, onLeaveCity }) => {
   }, [onLeaveCity]);
 
   return (
-    // Natural 23.5 degree Earth axial tilt, initially framed on Americas, Atlantic & Europe
-    <group ref={groupRef} rotation={[0.32, -0.65, 0.08]}>
+    // Natural Earth axial tilt, initially framed directly on Americas & glowing tech continents from frame 0
+    <group ref={groupRef} rotation={[0.28, -0.05, 0.04]}>
       {/* Invisible raycast interaction sphere */}
       <mesh
         onPointerMove={handlePointerMove}
@@ -242,7 +251,7 @@ const RealNeonEarth = ({ onHoverCity, onLeaveCity }) => {
         <meshBasicMaterial transparent opacity={0} depthWrite={false} />
       </mesh>
 
-      {/* Deep Midnight Obsidian Core: provides solid 3D mass so continents stand out vividly */}
+      {/* Deep Midnight Obsidian Core: gives solid 3D mass so continents stand out vividly */}
       <mesh>
         <sphereGeometry args={[1.98, 48, 48]} />
         <meshBasicMaterial
@@ -257,9 +266,9 @@ const RealNeonEarth = ({ onHoverCity, onLeaveCity }) => {
       <mesh>
         <sphereGeometry args={[2.08, 40, 40]} />
         <meshBasicMaterial
-          color="#0284c7"
+          color="#00f0ff"
           transparent
-          opacity={0.22}
+          opacity={0.28}
           side={THREE.BackSide}
           blending={THREE.AdditiveBlending}
           depthWrite={false}
@@ -279,7 +288,7 @@ const RealNeonEarth = ({ onHoverCity, onLeaveCity }) => {
         <lineBasicMaterial
           color="#1e40af"
           transparent
-          opacity={0.32}
+          opacity={0.35}
           blending={THREE.AdditiveBlending}
           depthWrite={false}
         />
@@ -298,7 +307,7 @@ const RealNeonEarth = ({ onHoverCity, onLeaveCity }) => {
         <lineBasicMaterial
           color="#38bdf8"
           transparent
-          opacity={0.45}
+          opacity={0.5}
           blending={THREE.AdditiveBlending}
           depthWrite={false}
         />
@@ -315,11 +324,11 @@ const RealNeonEarth = ({ onHoverCity, onLeaveCity }) => {
           />
         </bufferGeometry>
         <pointsMaterial
-          size={0.04}
+          size={0.045}
           color="#60a5fa"
           map={starTexture}
           transparent
-          opacity={0.5}
+          opacity={0.55}
           blending={THREE.AdditiveBlending}
           depthWrite={false}
           sizeAttenuation
@@ -337,9 +346,9 @@ const RealNeonEarth = ({ onHoverCity, onLeaveCity }) => {
           />
         </bufferGeometry>
         <lineBasicMaterial
-          color="#2563eb"
+          color="#38bdf8"
           transparent
-          opacity={0.82}
+          opacity={0.92}
           blending={THREE.AdditiveBlending}
           depthWrite={false}
         />
@@ -356,15 +365,15 @@ const RealNeonEarth = ({ onHoverCity, onLeaveCity }) => {
           />
         </bufferGeometry>
         <lineBasicMaterial
-          color="#38bdf8"
+          color="#00f0ff"
           transparent
-          opacity={0.95}
+          opacity={1.0}
           blending={THREE.AdditiveBlending}
           depthWrite={false}
         />
       </lineSegments>
 
-      {/* Real World Country Borders (Delicate Electric Blue) */}
+      {/* Real World Country Borders (Delicate Neon Blue) */}
       <lineSegments>
         <bufferGeometry>
           <bufferAttribute
@@ -375,9 +384,9 @@ const RealNeonEarth = ({ onHoverCity, onLeaveCity }) => {
           />
         </bufferGeometry>
         <lineBasicMaterial
-          color="#60a5fa"
+          color="#818cf8"
           transparent
-          opacity={0.45}
+          opacity={0.65}
           blending={THREE.AdditiveBlending}
           depthWrite={false}
         />
@@ -396,7 +405,7 @@ const RealNeonEarth = ({ onHoverCity, onLeaveCity }) => {
         <lineBasicMaterial
           color="#38bdf8"
           transparent
-          opacity={0.7}
+          opacity={0.78}
           blending={THREE.AdditiveBlending}
           depthWrite={false}
         />
@@ -413,8 +422,8 @@ const RealNeonEarth = ({ onHoverCity, onLeaveCity }) => {
           />
         </bufferGeometry>
         <pointsMaterial
-          size={0.045}
-          color="#7dd3fc"
+          size={0.075}
+          color="#ffffff"
           map={starTexture}
           transparent
           alphaTest={0.01}
@@ -441,7 +450,7 @@ const RealNeonEarth = ({ onHoverCity, onLeaveCity }) => {
           />
         </bufferGeometry>
         <pointsMaterial
-          size={0.13}
+          size={0.15}
           map={starTexture}
           vertexColors
           transparent
@@ -463,7 +472,7 @@ const RealNeonEarth = ({ onHoverCity, onLeaveCity }) => {
           />
         </bufferGeometry>
         <pointsMaterial
-          size={0.14}
+          size={0.15}
           color="#ffffff"
           map={starTexture}
           transparent
