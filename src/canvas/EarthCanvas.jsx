@@ -4,18 +4,18 @@ import { OrbitControls, Preload } from '@react-three/drei';
 import * as THREE from 'three';
 import globeData from '../data/globeNetwork.json';
 
-// Luminous soft star sprite texture for nodes
+// Create a high-intensity neon star sprite texture for glowing nodes
 function createNeonNodeTexture() {
   const canvas = document.createElement('canvas');
   canvas.width = 64;
   canvas.height = 64;
   const ctx = canvas.getContext('2d');
 
-  const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 30);
+  const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
   gradient.addColorStop(0, '#ffffff');
-  gradient.addColorStop(0.25, '#ffffff');
-  gradient.addColorStop(0.55, 'rgba(196, 181, 253, 0.9)');
-  gradient.addColorStop(0.85, 'rgba(129, 140, 248, 0.25)');
+  gradient.addColorStop(0.18, 'rgba(255, 255, 255, 1)');
+  gradient.addColorStop(0.42, 'rgba(192, 132, 252, 0.85)');
+  gradient.addColorStop(0.72, 'rgba(147, 51, 234, 0.45)');
   gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
 
   ctx.fillStyle = gradient;
@@ -32,7 +32,7 @@ const NeonPlexusGlobe = ({ hoverPointRef, isHoveredRef, onGlobePointerMove, onGl
   const hasActiveHoverRef = useRef(false);
   const nodeTexture = useMemo(() => createNeonNodeTexture(), []);
 
-  // Pre-calculate positions and clean, crisp base colors
+  // Pre-calculate positions and glowing colors once for high-performance 60fps rendering
   const {
     pts,
     lines,
@@ -52,8 +52,9 @@ const NeonPlexusGlobe = ({ hoverPointRef, isHoveredRef, onGlobePointerMove, onGl
     const cNodeCol = new Float32Array(pList.length * 3);
 
     const cWhite = new THREE.Color('#ffffff');
-    const cLavender = new THREE.Color('#c4b5fd');
-    const cPeriwinkle = new THREE.Color('#818cf8');
+    const cNeonViolet = new THREE.Color('#c084fc');
+    const cNeonPurple = new THREE.Color('#a855f7');
+    const cDeepIndigo = new THREE.Color('#6366f1');
 
     for (let i = 0; i < pList.length; i++) {
       const p = pList[i];
@@ -61,15 +62,20 @@ const NeonPlexusGlobe = ({ hoverPointRef, isHoveredRef, onGlobePointerMove, onGl
       pPos[i * 3 + 1] = p.y;
       pPos[i * 3 + 2] = p.z;
 
-      const col = p.isHub ? cWhite : (p.isLand ? cLavender : cPeriwinkle);
+      // Color nodes based on type (hubs glow brilliant white, others vivid neon violet)
+      const color = p.isHub
+        ? cWhite
+        : (p.type === 'continent_cluster'
+          ? cNeonViolet
+          : (i % 2 === 0 ? cNeonPurple : cDeepIndigo));
 
-      bNodeCol[i * 3] = col.r;
-      bNodeCol[i * 3 + 1] = col.g;
-      bNodeCol[i * 3 + 2] = col.b;
+      bNodeCol[i * 3] = color.r;
+      bNodeCol[i * 3 + 1] = color.g;
+      bNodeCol[i * 3 + 2] = color.b;
 
-      cNodeCol[i * 3] = bNodeCol[i * 3];
-      cNodeCol[i * 3 + 1] = bNodeCol[i * 3 + 1];
-      cNodeCol[i * 3 + 2] = bNodeCol[i * 3 + 2];
+      cNodeCol[i * 3] = color.r;
+      cNodeCol[i * 3 + 1] = color.g;
+      cNodeCol[i * 3 + 2] = color.b;
     }
 
     // 2. Line segments buffer
@@ -77,16 +83,12 @@ const NeonPlexusGlobe = ({ hoverPointRef, isHoveredRef, onGlobePointerMove, onGl
     const bLineCol = new Float32Array(lList.length * 6);
     const cLineCol = new Float32Array(lList.length * 6);
 
-    // Balanced color palette preventing blowout
-    const cLandLine = new THREE.Color('#a5b4fc');
-    const cOceanLine = new THREE.Color('#6366f1');
-    const cChordLine = new THREE.Color('#4338ca');
-
     for (let k = 0; k < lList.length; k++) {
-      const [i, j, , isChord] = lList[k];
+      const [i, j, dist] = lList[k];
       const p1 = pList[i];
       const p2 = pList[j];
 
+      // Coordinates
       lPos[k * 6] = p1.x;
       lPos[k * 6 + 1] = p1.y;
       lPos[k * 6 + 2] = p1.z;
@@ -94,15 +96,17 @@ const NeonPlexusGlobe = ({ hoverPointRef, isHoveredRef, onGlobePointerMove, onGl
       lPos[k * 6 + 4] = p2.y;
       lPos[k * 6 + 5] = p2.z;
 
-      let col = isChord ? cChordLine : (p1.isLand && p2.isLand ? cLandLine : cOceanLine);
-      const intensity = isChord ? 0.45 : (p1.isLand && p2.isLand ? 0.95 : 0.7);
+      // Neon intensity factor
+      const intensity = Math.max(0.35, 1 - (dist / 0.55));
+      const col1 = p1.isHub ? cWhite : cNeonViolet;
+      const col2 = p2.isHub ? cWhite : cNeonPurple;
 
-      bLineCol[k * 6] = col.r * intensity;
-      bLineCol[k * 6 + 1] = col.g * intensity;
-      bLineCol[k * 6 + 2] = col.b * intensity;
-      bLineCol[k * 6 + 3] = col.r * intensity;
-      bLineCol[k * 6 + 4] = col.g * intensity;
-      bLineCol[k * 6 + 5] = col.b * intensity;
+      bLineCol[k * 6] = col1.r * intensity;
+      bLineCol[k * 6 + 1] = col1.g * intensity;
+      bLineCol[k * 6 + 2] = col1.b * intensity;
+      bLineCol[k * 6 + 3] = col2.r * intensity;
+      bLineCol[k * 6 + 4] = col2.g * intensity;
+      bLineCol[k * 6 + 5] = col2.b * intensity;
 
       cLineCol[k * 6] = bLineCol[k * 6];
       cLineCol[k * 6 + 1] = bLineCol[k * 6 + 1];
@@ -124,12 +128,10 @@ const NeonPlexusGlobe = ({ hoverPointRef, isHoveredRef, onGlobePointerMove, onGl
     };
   }, []);
 
-  // Update loop: orbital rotation + interactive real-time mouse hover glow
+  // Smooth GPU orbital rotation + Interactive real-time hover glow
   useFrame((state, delta) => {
     if (!groupRef.current) return;
-
-    // Ambient orbital rotation
-    groupRef.current.rotation.y += delta * 0.12;
+    groupRef.current.rotation.y += delta * 0.16;
 
     const isHovered = isHoveredRef.current;
     const localHoverPoint = hoverPointRef.current;
@@ -139,7 +141,7 @@ const NeonPlexusGlobe = ({ hoverPointRef, isHoveredRef, onGlobePointerMove, onGl
       const hX = localHoverPoint.x;
       const hY = localHoverPoint.y;
       const hZ = localHoverPoint.z;
-      const glowRadius = 0.75;
+      const glowRadius = 0.72;
       const glowRadiusSq = glowRadius * glowRadius;
 
       // 1. Highlight Nodes in hover radius to solid bright white
@@ -147,7 +149,6 @@ const NeonPlexusGlobe = ({ hoverPointRef, isHoveredRef, onGlobePointerMove, onGl
         const px = nodePositions[i * 3];
         const py = nodePositions[i * 3 + 1];
         const pz = nodePositions[i * 3 + 2];
-
         const dSq = (px - hX) * (px - hX) + (py - hY) * (py - hY) + (pz - hZ) * (pz - hZ);
 
         if (dSq < glowRadiusSq) {
@@ -169,7 +170,6 @@ const NeonPlexusGlobe = ({ hoverPointRef, isHoveredRef, onGlobePointerMove, onGl
         const p1x = nodePositions[i * 3];
         const p1y = nodePositions[i * 3 + 1];
         const p1z = nodePositions[i * 3 + 2];
-
         const p2x = nodePositions[j * 3];
         const p2y = nodePositions[j * 3 + 1];
         const p2z = nodePositions[j * 3 + 2];
@@ -199,7 +199,6 @@ const NeonPlexusGlobe = ({ hoverPointRef, isHoveredRef, onGlobePointerMove, onGl
       }
       lineGeoRef.current.attributes.color.needsUpdate = true;
     } else if (hasActiveHoverRef.current && pointGeoRef.current && lineGeoRef.current) {
-      // Cleanly reset back to luminous base colors when cursor leaves
       currentNodeColors.set(baseNodeColors);
       currentLineColors.set(baseLineColors);
       pointGeoRef.current.attributes.color.needsUpdate = true;
@@ -224,42 +223,43 @@ const NeonPlexusGlobe = ({ hoverPointRef, isHoveredRef, onGlobePointerMove, onGl
   }, [hoverPointRef, isHoveredRef, onGlobePointerOut]);
 
   return (
-    <group ref={groupRef} rotation={[0.2, 0, 0.05]}>
+    // Natural axial tilt with initial orientation facing Europe & Africa continents
+    <group ref={groupRef} rotation={[0.25, -2.1, 0.1]}>
       {/* Invisible raycast surface sphere capturing pointer movement */}
       <mesh
         onPointerMove={handlePointerMove}
         onPointerOut={handlePointerOut}
         visible={false}
       >
-        <sphereGeometry args={[2.14, 32, 32]} />
+        <sphereGeometry args={[2.08, 32, 32]} />
         <meshBasicMaterial transparent opacity={0} depthWrite={false} />
       </mesh>
 
-      {/* Dark Cosmic Core providing occlusion depth & preventing white blowout */}
+      {/* Dark Inner Core Sphere: provides true volumetric 3D depth without cutting lines */}
       <mesh>
-        <sphereGeometry args={[1.96, 48, 48]} />
+        <sphereGeometry args={[1.88, 48, 48]} />
         <meshBasicMaterial
-          color="#040212"
+          color="#030014"
           transparent
           opacity={0.88}
           depthWrite={false}
         />
       </mesh>
 
-      {/* Subtle outer atmospheric rim aura */}
+      {/* Atmospheric Neon Rim Glow */}
       <mesh>
-        <sphereGeometry args={[2.08, 48, 48]} />
+        <sphereGeometry args={[2.02, 32, 32]} />
         <meshBasicMaterial
-          color="#6366f1"
+          color="#7c3aed"
           transparent
-          opacity={0.07}
+          opacity={0.16}
           side={THREE.BackSide}
           blending={THREE.AdditiveBlending}
           depthWrite={false}
         />
       </mesh>
 
-      {/* Luminous Connecting Lines & Interior Chords */}
+      {/* Primary Glowing Neon Lines with Additive Blending */}
       <lineSegments>
         <bufferGeometry ref={lineGeoRef}>
           <bufferAttribute
@@ -278,13 +278,13 @@ const NeonPlexusGlobe = ({ hoverPointRef, isHoveredRef, onGlobePointerMove, onGl
         <lineBasicMaterial
           vertexColors
           transparent
-          opacity={0.72}
-          blending={THREE.NormalBlending}
+          opacity={0.92}
+          blending={THREE.AdditiveBlending}
           depthWrite={false}
         />
       </lineSegments>
 
-      {/* Star / Node Points across the entire sphere */}
+      {/* Intense Glowing Star / Node Points */}
       <points>
         <bufferGeometry ref={pointGeoRef}>
           <bufferAttribute
@@ -301,12 +301,12 @@ const NeonPlexusGlobe = ({ hoverPointRef, isHoveredRef, onGlobePointerMove, onGl
           />
         </bufferGeometry>
         <pointsMaterial
-          size={0.038}
+          size={0.12}
           map={nodeTexture}
           vertexColors
           transparent
           alphaTest={0.01}
-          blending={THREE.NormalBlending}
+          blending={THREE.AdditiveBlending}
           depthWrite={false}
           sizeAttenuation
         />
@@ -342,14 +342,14 @@ export const EarthCanvas = () => {
         fov: 45,
         near: 0.1,
         far: 100,
-        position: [0, 0, 6.4],
+        position: [0, 0, 6.6],
       }}
       className="w-full h-full cursor-grab active:cursor-grabbing select-none"
     >
       <Suspense fallback={null}>
         <OrbitControls
           autoRotate
-          autoRotateSpeed={0.7}
+          autoRotateSpeed={0.8}
           enableZoom={false}
           maxPolarAngle={Math.PI / 2 + 0.35}
           minPolarAngle={Math.PI / 2 - 0.35}
@@ -369,11 +369,11 @@ export const EarthCanvas = () => {
               <meshBasicMaterial color="#ffffff" transparent opacity={0.95} />
             </mesh>
             <mesh>
-              <ringGeometry args={[0.06, 0.18, 24]} />
+              <ringGeometry args={[0.06, 0.20, 24]} />
               <meshBasicMaterial
                 color="#c084fc"
                 transparent
-                opacity={0.5}
+                opacity={0.65}
                 side={THREE.DoubleSide}
                 blending={THREE.AdditiveBlending}
                 depthWrite={false}
