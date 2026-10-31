@@ -220,8 +220,10 @@ export const Contact = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.6 }}
-            className="xl:flex-1 w-full xl:h-[500px] lg:h-[460px] md:h-[420px] sm:h-[380px] h-[320px] flex items-center justify-center relative"
+            className="xl:flex-1 w-full xl:h-[540px] lg:h-[480px] md:h-[440px] sm:h-[390px] h-[340px] flex items-center justify-center relative"
           >
+            {/* Ambient Cosmic Neon Radial Aura */}
+            <div className="absolute w-[85%] h-[85%] rounded-full bg-gradient-to-tr from-[#7c3aed]/20 via-[#a855f7]/12 to-[#38bdf8]/15 blur-3xl pointer-events-none -z-10" />
             <EarthCanvas />
           </motion.div>
         </div>

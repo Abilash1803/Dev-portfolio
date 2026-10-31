@@ -1,10 +1,10 @@
-import React, { useRef, useMemo, useState, useCallback, Suspense } from 'react';
+import React, { useRef, useMemo, useState, useEffect, useCallback, Suspense } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Preload } from '@react-three/drei';
 import * as THREE from 'three';
 import globeData from '../data/globeNetwork.json';
 
-// Create a high-intensity neon star sprite texture for glowing nodes
+// High-intensity neon star sprite texture for glowing nodes
 function createNeonNodeTexture() {
   const canvas = document.createElement('canvas');
   canvas.width = 64;
@@ -13,9 +13,9 @@ function createNeonNodeTexture() {
 
   const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
   gradient.addColorStop(0, '#ffffff');
-  gradient.addColorStop(0.18, 'rgba(255, 255, 255, 1)');
-  gradient.addColorStop(0.42, 'rgba(192, 132, 252, 0.85)');
-  gradient.addColorStop(0.72, 'rgba(147, 51, 234, 0.45)');
+  gradient.addColorStop(0.2, 'rgba(255, 255, 255, 1)');
+  gradient.addColorStop(0.45, 'rgba(192, 132, 252, 0.9)');
+  gradient.addColorStop(0.75, 'rgba(147, 51, 234, 0.4)');
   gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
 
   ctx.fillStyle = gradient;
@@ -30,9 +30,25 @@ const NeonPlexusGlobe = ({ hoverPointRef, isHoveredRef, onGlobePointerMove, onGl
   const pointGeoRef = useRef();
   const lineGeoRef = useRef();
   const hasActiveHoverRef = useRef(false);
+  const scrollVelocity = useRef(0);
+  const lastScrollY = useRef(typeof window !== 'undefined' ? window.scrollY : 0);
   const nodeTexture = useMemo(() => createNeonNodeTexture(), []);
 
-  // Pre-calculate positions and glowing colors once for high-performance 60fps rendering
+  // Listen to window scroll to power the 3D cinematic scroll inertia
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentY = window.scrollY;
+      const delta = currentY - lastScrollY.current;
+      lastScrollY.current = currentY;
+      // Impart rotational momentum on scroll
+      scrollVelocity.current += delta * 0.0035;
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Pre-calculate positions and glowing neon colors once for maximum 60+ FPS performance
   const {
     pts,
     lines,
@@ -52,9 +68,10 @@ const NeonPlexusGlobe = ({ hoverPointRef, isHoveredRef, onGlobePointerMove, onGl
     const cNodeCol = new Float32Array(pList.length * 3);
 
     const cWhite = new THREE.Color('#ffffff');
+    const cCyan = new THREE.Color('#38bdf8');
     const cNeonViolet = new THREE.Color('#c084fc');
     const cNeonPurple = new THREE.Color('#a855f7');
-    const cDeepIndigo = new THREE.Color('#6366f1');
+    const cDeepIndigo = new THREE.Color('#818cf8');
 
     for (let i = 0; i < pList.length; i++) {
       const p = pList[i];
@@ -62,12 +79,15 @@ const NeonPlexusGlobe = ({ hoverPointRef, isHoveredRef, onGlobePointerMove, onGl
       pPos[i * 3 + 1] = p.y;
       pPos[i * 3 + 2] = p.z;
 
-      // Color nodes based on type (hubs glow brilliant white, others vivid neon violet)
-      const color = p.isHub
-        ? cWhite
-        : (p.type === 'continent_cluster'
-          ? cNeonViolet
-          : (i % 2 === 0 ? cNeonPurple : cDeepIndigo));
+      // Color nodes: hubs glow radiant white, land clusters glow neon violet, ocean nodes glow cyan/periwinkle
+      let color;
+      if (p.isHub) {
+        color = cWhite;
+      } else if (p.isLand) {
+        color = i % 3 === 0 ? cNeonViolet : cNeonPurple;
+      } else {
+        color = i % 2 === 0 ? cCyan : cDeepIndigo;
+      }
 
       bNodeCol[i * 3] = color.r;
       bNodeCol[i * 3 + 1] = color.g;
@@ -84,11 +104,10 @@ const NeonPlexusGlobe = ({ hoverPointRef, isHoveredRef, onGlobePointerMove, onGl
     const cLineCol = new Float32Array(lList.length * 6);
 
     for (let k = 0; k < lList.length; k++) {
-      const [i, j, dist] = lList[k];
+      const [i, j, dist, isLand] = lList[k];
       const p1 = pList[i];
       const p2 = pList[j];
 
-      // Coordinates
       lPos[k * 6] = p1.x;
       lPos[k * 6 + 1] = p1.y;
       lPos[k * 6 + 2] = p1.z;
@@ -96,10 +115,10 @@ const NeonPlexusGlobe = ({ hoverPointRef, isHoveredRef, onGlobePointerMove, onGl
       lPos[k * 6 + 4] = p2.y;
       lPos[k * 6 + 5] = p2.z;
 
-      // Neon intensity factor
-      const intensity = Math.max(0.35, 1 - (dist / 0.55));
-      const col1 = p1.isHub ? cWhite : cNeonViolet;
-      const col2 = p2.isHub ? cWhite : cNeonPurple;
+      // Distance falloff intensity
+      const intensity = Math.max(0.38, 1 - (dist / 0.52));
+      const col1 = p1.isHub ? cWhite : (isLand ? cNeonViolet : cDeepIndigo);
+      const col2 = p2.isHub ? cWhite : (isLand ? cNeonPurple : cCyan);
 
       bLineCol[k * 6] = col1.r * intensity;
       bLineCol[k * 6 + 1] = col1.g * intensity;
@@ -128,10 +147,22 @@ const NeonPlexusGlobe = ({ hoverPointRef, isHoveredRef, onGlobePointerMove, onGl
     };
   }, []);
 
-  // Smooth GPU orbital rotation + Interactive real-time hover glow
+  // Frame loop: ambient orbital rotation + scroll-driven 3D cinematic rotation + hover glow
   useFrame((state, delta) => {
     if (!groupRef.current) return;
-    groupRef.current.rotation.y += delta * 0.16;
+
+    // Damped scroll momentum: smoothly glides back to 0 when scrolling halts
+    scrollVelocity.current = THREE.MathUtils.damp(scrollVelocity.current, 0, 4.5, delta);
+
+    // Continuous orbital rotation + scroll responsiveness
+    groupRef.current.rotation.y += delta * 0.14 + scrollVelocity.current;
+
+    // Subtle natural tilt animation responding to scroll velocity
+    groupRef.current.rotation.x = THREE.MathUtils.lerp(
+      groupRef.current.rotation.x,
+      0.22 + (scrollVelocity.current * 0.4),
+      0.08
+    );
 
     const isHovered = isHoveredRef.current;
     const localHoverPoint = hoverPointRef.current;
@@ -144,7 +175,7 @@ const NeonPlexusGlobe = ({ hoverPointRef, isHoveredRef, onGlobePointerMove, onGl
       const glowRadius = 0.72;
       const glowRadiusSq = glowRadius * glowRadius;
 
-      // 1. Highlight Nodes in hover radius to solid bright white
+      // 1. Highlight Nodes in hover radius to brilliant pure white & cyan
       for (let i = 0; i < pts.length; i++) {
         const px = nodePositions[i * 3];
         const py = nodePositions[i * 3 + 1];
@@ -164,7 +195,7 @@ const NeonPlexusGlobe = ({ hoverPointRef, isHoveredRef, onGlobePointerMove, onGl
       }
       pointGeoRef.current.attributes.color.needsUpdate = true;
 
-      // 2. Highlight Lines connecting in hover radius to pure bright white
+      // 2. Highlight Lines connecting in hover radius to vivid luminous white
       for (let k = 0; k < lines.length; k++) {
         const [i, j] = lines[k];
         const p1x = nodePositions[i * 3];
@@ -223,32 +254,31 @@ const NeonPlexusGlobe = ({ hoverPointRef, isHoveredRef, onGlobePointerMove, onGl
   }, [hoverPointRef, isHoveredRef, onGlobePointerOut]);
 
   return (
-    // Natural axial tilt with initial orientation facing Europe & Africa continents
-    <group ref={groupRef} rotation={[0.25, -2.1, 0.1]}>
-      {/* Invisible raycast surface sphere capturing pointer movement */}
+    <group ref={groupRef} rotation={[0.22, -2.1, 0.08]}>
+      {/* Invisible raycast interaction sphere capturing cursor movement */}
       <mesh
         onPointerMove={handlePointerMove}
         onPointerOut={handlePointerOut}
         visible={false}
       >
-        <sphereGeometry args={[2.08, 32, 32]} />
+        <sphereGeometry args={[2.10, 32, 32]} />
         <meshBasicMaterial transparent opacity={0} depthWrite={false} />
       </mesh>
 
-      {/* Dark Inner Core Sphere: provides true volumetric 3D depth without cutting lines */}
+      {/* Deep Space Translucent Core: provides rich 3D volumetric depth without obscuring internal neon strings */}
       <mesh>
-        <sphereGeometry args={[1.88, 48, 48]} />
+        <sphereGeometry args={[1.92, 48, 48]} />
         <meshBasicMaterial
-          color="#030014"
+          color="#060218"
           transparent
-          opacity={0.88}
+          opacity={0.35}
           depthWrite={false}
         />
       </mesh>
 
       {/* Atmospheric Neon Rim Glow */}
       <mesh>
-        <sphereGeometry args={[2.02, 32, 32]} />
+        <sphereGeometry args={[2.08, 40, 40]} />
         <meshBasicMaterial
           color="#7c3aed"
           transparent
@@ -259,7 +289,7 @@ const NeonPlexusGlobe = ({ hoverPointRef, isHoveredRef, onGlobePointerMove, onGl
         />
       </mesh>
 
-      {/* Primary Glowing Neon Lines with Additive Blending */}
+      {/* Interconnected Glowing Neon Lines / Strings */}
       <lineSegments>
         <bufferGeometry ref={lineGeoRef}>
           <bufferAttribute
@@ -278,13 +308,13 @@ const NeonPlexusGlobe = ({ hoverPointRef, isHoveredRef, onGlobePointerMove, onGl
         <lineBasicMaterial
           vertexColors
           transparent
-          opacity={0.92}
+          opacity={0.88}
           blending={THREE.AdditiveBlending}
           depthWrite={false}
         />
       </lineSegments>
 
-      {/* Intense Glowing Star / Node Points */}
+      {/* Glowing Star / Coordinate Nodes */}
       <points>
         <bufferGeometry ref={pointGeoRef}>
           <bufferAttribute
@@ -301,7 +331,7 @@ const NeonPlexusGlobe = ({ hoverPointRef, isHoveredRef, onGlobePointerMove, onGl
           />
         </bufferGeometry>
         <pointsMaterial
-          size={0.12}
+          size={0.10}
           map={nodeTexture}
           vertexColors
           transparent
@@ -348,8 +378,7 @@ export const EarthCanvas = () => {
     >
       <Suspense fallback={null}>
         <OrbitControls
-          autoRotate
-          autoRotateSpeed={0.8}
+          autoRotate={false}
           enableZoom={false}
           maxPolarAngle={Math.PI / 2 + 0.35}
           minPolarAngle={Math.PI / 2 - 0.35}
@@ -361,25 +390,14 @@ export const EarthCanvas = () => {
           onGlobePointerOut={handleGlobePointerOut}
         />
 
-        {/* Dynamic bright beacon flare directly where mouse hovers */}
+        {/* Soft natural point light focused on hover location (no flat geometry disc) */}
         {hoverPosWorld && (
-          <group position={[hoverPosWorld.x, hoverPosWorld.y, hoverPosWorld.z]}>
-            <mesh>
-              <sphereGeometry args={[0.045, 16, 16]} />
-              <meshBasicMaterial color="#ffffff" transparent opacity={0.95} />
-            </mesh>
-            <mesh>
-              <ringGeometry args={[0.06, 0.20, 24]} />
-              <meshBasicMaterial
-                color="#c084fc"
-                transparent
-                opacity={0.65}
-                side={THREE.DoubleSide}
-                blending={THREE.AdditiveBlending}
-                depthWrite={false}
-              />
-            </mesh>
-          </group>
+          <pointLight
+            position={[hoverPosWorld.x, hoverPosWorld.y, hoverPosWorld.z]}
+            intensity={3.5}
+            distance={2.2}
+            color="#e0e7ff"
+          />
         )}
 
         <Preload all />
