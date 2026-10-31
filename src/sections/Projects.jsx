@@ -16,10 +16,10 @@ export const Projects = () => {
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.6 }}
       >
-        <p className="sm:text-[16px] text-[13px] text-[#aaa6c3] uppercase tracking-wider font-semibold">
-          MY WORK
+        <p className="sm:text-[14px] text-[12px] text-[#915EFF] font-tech uppercase tracking-widest font-semibold">
+          PORTFOLIO SHOWCASE
         </p>
-        <h2 className="text-white font-black md:text-[54px] sm:text-[44px] xs:text-[34px] text-[28px] mt-1">
+        <h2 className="text-white font-display font-black md:text-[54px] sm:text-[44px] xs:text-[34px] text-[28px] mt-1 tracking-tight">
           <span className="text-[#915EFF] purple-text-gradient">Projects.</span>
         </h2>
       </motion.div>

@@ -13,7 +13,7 @@ export const Security = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-[36px] sm:text-[45px] md:text-[50px] font-semibold text-center text-gray-200 tracking-tight"
+            className="text-[36px] sm:text-[45px] md:text-[50px] font-semibold text-center text-gray-200 tracking-tight font-display"
           >
             Performance{' '}
             <span className="magic text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500 font-serif italic">
@@ -49,7 +49,7 @@ export const Security = () => {
           transition={{ duration: 0.4 }}
           className="px-5 py-1 border my-5 border-[#7042f88b] bg-[#100d25]/60 backdrop-blur-md opacity-90 rounded-full shadow-[0_0_15px_rgba(145,94,255,0.3)]"
         >
-          <div className="text-xs sm:text-sm font-semibold tracking-wider text-[#dfd9ff] uppercase">
+          <div className="text-xs sm:text-sm font-semibold tracking-wider text-[#dfd9ff] uppercase font-tech">
             Encryption
           </div>
         </motion.div>

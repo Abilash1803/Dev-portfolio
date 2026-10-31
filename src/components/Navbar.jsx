@@ -50,23 +50,23 @@ export const Navbar = () => {
           </div>
 
           <div className="flex flex-col">
-            <span className="text-white text-[18px] font-bold tracking-tight">
+            <span className="text-white text-[19px] font-display font-bold tracking-tight">
               Abilash B
             </span>
-            <span className="text-[#aaa6c3] text-[12px] font-medium tracking-wide hidden sm:block">
+            <span className="text-[#aaa6c3] text-[11px] font-tech font-medium tracking-widest uppercase hidden sm:block">
               Full Stack Developer
             </span>
           </div>
         </a>
 
         {/* Desktop Nav Links */}
-        <ul className="list-none hidden md:flex flex-row gap-10">
+        <ul className="list-none hidden md:flex flex-row gap-9">
           {navLinks.map((link) => (
             <li
               key={link.id}
               className={`${
-                active === link.title ? 'text-white' : 'text-[#aaa6c3]'
-              } hover:text-white text-[18px] font-medium cursor-pointer transition-colors relative group`}
+                active === link.title ? 'text-white font-semibold' : 'text-[#aaa6c3]'
+              } hover:text-white text-[15px] font-tech font-medium tracking-wider cursor-pointer transition-colors relative group uppercase`}
               onClick={() => setActive(link.title)}
             >
               <a href={`#${link.id}`}>{link.title}</a>
@@ -98,7 +98,7 @@ export const Navbar = () => {
                   key={link.id}
                   className={`${
                     active === link.title ? 'text-white font-bold' : 'text-[#aaa6c3]'
-                  } font-poppins text-[16px] cursor-pointer hover:text-white transition-colors`}
+                  } font-tech text-[16px] cursor-pointer hover:text-white transition-colors`}
                   onClick={() => {
                     setToggle(false);
                     setActive(link.title);

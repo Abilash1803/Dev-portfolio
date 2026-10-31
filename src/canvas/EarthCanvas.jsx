@@ -4,7 +4,7 @@ import { OrbitControls, Preload } from '@react-three/drei';
 import * as THREE from 'three';
 import realEarthData from '../data/realEarth.json';
 
-// High-intensity radial star sprite for tech hub nodes and pulse beacons
+// High-intensity radial star sprite for tech hub nodes and plexus points
 function createStarNodeTexture() {
   const canvas = document.createElement('canvas');
   canvas.width = 64;
@@ -13,9 +13,9 @@ function createStarNodeTexture() {
 
   const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
   gradient.addColorStop(0, '#ffffff');
-  gradient.addColorStop(0.25, 'rgba(255, 255, 255, 1)');
-  gradient.addColorStop(0.5, 'rgba(56, 189, 248, 0.9)');
-  gradient.addColorStop(0.8, 'rgba(168, 85, 247, 0.35)');
+  gradient.addColorStop(0.2, 'rgba(255, 255, 255, 1)');
+  gradient.addColorStop(0.45, 'rgba(56, 189, 248, 0.95)');
+  gradient.addColorStop(0.75, 'rgba(37, 99, 235, 0.45)');
   gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
 
   ctx.fillStyle = gradient;
@@ -29,46 +29,56 @@ const RealNeonEarth = ({ onHoverCity, onLeaveCity }) => {
   const packetPointsRef = useRef();
   const starTexture = useMemo(() => createStarNodeTexture(), []);
 
-  // 1. Coastlines geometry buffer (Exact real-world continents)
+  // 1. Continental Plexus Strings (Triangulated continental network matching Image 1)
+  const plexusLinePositions = useMemo(() => {
+    return new Float32Array(realEarthData.plexusLines);
+  }, []);
+
+  // 2. Continental Plexus Node Points (Glowing vertices on all continents)
+  const plexusPointPositions = useMemo(() => {
+    return new Float32Array(realEarthData.plexusPoints);
+  }, []);
+
+  // 3. Real World Coastlines buffer (Vivid electric cyan outer boundary)
   const coastPositions = useMemo(() => {
     return new Float32Array(realEarthData.coastline);
   }, []);
 
-  // 2. Country borders geometry buffer (Exact real-world national boundaries)
+  // 4. Real World Country Borders buffer (Delicate national boundaries)
   const borderPositions = useMemo(() => {
     return new Float32Array(realEarthData.borders);
   }, []);
 
-  // 3. Global Oceanic Coordinate Graticule Grid (Meridians & Parallels)
-  // Guarantees zero blank spots anywhere on Earth (e.g. across Pacific & Atlantic oceans)
+  // 5. Global Oceanic Coordinate Graticule Grid (Meridians & Parallels)
+  // Guarantees ZERO blank spots across oceans (Pacific, Atlantic, Indian, Arctic)
   const { graticulePositions, equatorPositions } = useMemo(() => {
     const coords = [];
     const eqCoords = [];
-    const radius = 2.015;
+    const radius = 2.016;
 
-    // Latitude circles (parallels) every 15 degrees
+    // Latitude parallels every 15 degrees
     for (let lat = -75; lat <= 75; lat += 15) {
       const phi = (lat * Math.PI) / 180;
       const y = radius * Math.sin(phi);
       const r = radius * Math.cos(phi);
       const segments = 64;
-      const targetArray = lat === 0 ? eqCoords : coords;
+      const target = lat === 0 ? eqCoords : coords;
 
       for (let s = 0; s < segments; s++) {
         const t1 = (s / segments) * Math.PI * 2;
         const t2 = ((s + 1) / segments) * Math.PI * 2;
-        targetArray.push(
+        target.push(
           r * Math.cos(t1), y, r * Math.sin(t1),
           r * Math.cos(t2), y, r * Math.sin(t2)
         );
       }
     }
 
-    // Longitude circles (meridians) every 15 degrees
+    // Longitude meridians every 15 degrees
     for (let lon = 0; lon < 360; lon += 15) {
       const theta = (lon * Math.PI) / 180;
       const segments = 48;
-      const targetArray = lon === 0 || lon === 180 ? eqCoords : coords;
+      const target = lon === 0 || lon === 180 ? eqCoords : coords;
 
       for (let s = 0; s < segments; s++) {
         const lat1 = -85 + (s / segments) * 170;
@@ -82,7 +92,7 @@ const RealNeonEarth = ({ onHoverCity, onLeaveCity }) => {
         const y2 = radius * Math.sin(p2);
         const r2 = radius * Math.cos(p2);
 
-        targetArray.push(
+        target.push(
           r1 * Math.cos(theta), y1, r1 * Math.sin(theta),
           r2 * Math.cos(theta), y2, r2 * Math.sin(theta)
         );
@@ -95,11 +105,11 @@ const RealNeonEarth = ({ onHoverCity, onLeaveCity }) => {
     };
   }, []);
 
-  // 4. Uniform Oceanic Star Particles ensuring texture throughout water bodies
+  // 6. Oceanic Star Dust Particles ensuring fine digital texture across water bodies
   const oceanParticlePositions = useMemo(() => {
-    const count = 420;
+    const count = 480;
     const pos = new Float32Array(count * 3);
-    const radius = 2.016;
+    const radius = 2.017;
 
     for (let i = 0; i < count; i++) {
       const y = 1 - (i / (count - 1)) * 2;
@@ -113,7 +123,7 @@ const RealNeonEarth = ({ onHoverCity, onLeaveCity }) => {
     return pos;
   }, []);
 
-  // 5. Tech Hub City Beacons
+  // 7. Tech Hub City Beacons
   const { hubPositions, hubColors } = useMemo(() => {
     const hubs = realEarthData.hubs;
     const pos = new Float32Array(hubs.length * 3);
@@ -137,7 +147,7 @@ const RealNeonEarth = ({ onHoverCity, onLeaveCity }) => {
     return { hubPositions: pos, hubColors: col };
   }, []);
 
-  // 6. Parabolic Cyber Arcs buffer
+  // 8. Intercontinental Parabolic Cyber Flight Arcs
   const arcPositions = useMemo(() => {
     const allArcCoords = [];
     realEarthData.arcs.forEach((arc) => {
@@ -152,28 +162,26 @@ const RealNeonEarth = ({ onHoverCity, onLeaveCity }) => {
     return new Float32Array(allArcCoords);
   }, []);
 
-  // 7. Animated Energy Packets traveling along the cyber arcs
+  // 9. Initial Energy Packets buffer for traveling photons along cyber arcs
   const packetPositions = useMemo(() => {
-    const count = realEarthData.arcs.length;
-    return new Float32Array(count * 3);
+    return new Float32Array(realEarthData.arcs.length * 3);
   }, []);
 
   // Animation Loop: natural axial rotation + traveling energy packets
   useFrame((state) => {
     const time = state.clock.getElapsedTime();
 
-    // Natural gentle axial drift
     if (groupRef.current) {
-      groupRef.current.rotation.y += 0.0024;
+      groupRef.current.rotation.y += 0.0022;
     }
 
-    // Update positions of energy packets moving along the parabolic arcs
     if (packetPointsRef.current) {
       const arcs = realEarthData.arcs;
+      const array = packetPointsRef.current.attributes.position.array;
       for (let i = 0; i < arcs.length; i++) {
         const pts = arcs[i].points;
         const totalPoints = pts.length / 3;
-        const progress = (time * 0.42 + (i * 0.15)) % 1;
+        const progress = (time * 0.45 + (i * 0.14)) % 1;
         const index = Math.floor(progress * (totalPoints - 1));
         const nextIndex = Math.min(index + 1, totalPoints - 1);
         const subT = (progress * (totalPoints - 1)) - index;
@@ -182,9 +190,9 @@ const RealNeonEarth = ({ onHoverCity, onLeaveCity }) => {
         const y = THREE.MathUtils.lerp(pts[index * 3 + 1], pts[nextIndex * 3 + 1], subT);
         const z = THREE.MathUtils.lerp(pts[index * 3 + 2], pts[nextIndex * 3 + 2], subT);
 
-        packetPositions[i * 3] = x;
-        packetPositions[i * 3 + 1] = y;
-        packetPositions[i * 3 + 2] = z;
+        array[i * 3] = x;
+        array[i * 3 + 1] = y;
+        array[i * 3 + 2] = z;
       }
       packetPointsRef.current.attributes.position.needsUpdate = true;
     }
@@ -222,8 +230,8 @@ const RealNeonEarth = ({ onHoverCity, onLeaveCity }) => {
   }, [onLeaveCity]);
 
   return (
-    // Natural 23.5 degree Earth axial tilt, initially framed on Europe, Africa & Indian Ocean
-    <group ref={groupRef} rotation={[0.35, -1.8, 0.08]}>
+    // Natural 23.5 degree Earth axial tilt, initially framed on Americas, Atlantic & Europe
+    <group ref={groupRef} rotation={[0.32, -0.65, 0.08]}>
       {/* Invisible raycast interaction sphere */}
       <mesh
         onPointerMove={handlePointerMove}
@@ -234,31 +242,31 @@ const RealNeonEarth = ({ onHoverCity, onLeaveCity }) => {
         <meshBasicMaterial transparent opacity={0} depthWrite={false} />
       </mesh>
 
-      {/* Deep Space Translucent Core: provides 3D depth while allowing far-side grid lines to glow through softly */}
+      {/* Deep Midnight Obsidian Core: provides solid 3D mass so continents stand out vividly */}
       <mesh>
         <sphereGeometry args={[1.98, 48, 48]} />
         <meshBasicMaterial
-          color="#06021c"
+          color="#030514"
           transparent
-          opacity={0.65}
+          opacity={0.88}
           depthWrite={false}
         />
       </mesh>
 
-      {/* Outer Atmospheric Neon Rim Corona */}
+      {/* Outer Atmospheric Celestial Neon Rim Corona */}
       <mesh>
         <sphereGeometry args={[2.08, 40, 40]} />
         <meshBasicMaterial
-          color="#6366f1"
+          color="#0284c7"
           transparent
-          opacity={0.16}
+          opacity={0.22}
           side={THREE.BackSide}
           blending={THREE.AdditiveBlending}
           depthWrite={false}
         />
       </mesh>
 
-      {/* 1. Global Coordinate Graticule Grid (Meridians & Parallels) - guarantees no blank oceanic holes */}
+      {/* Global Coordinate Graticule Grid (Meridians & Parallels) - guarantees NO blank holes anywhere */}
       <lineSegments>
         <bufferGeometry>
           <bufferAttribute
@@ -269,15 +277,15 @@ const RealNeonEarth = ({ onHoverCity, onLeaveCity }) => {
           />
         </bufferGeometry>
         <lineBasicMaterial
-          color="#6366f1"
+          color="#1e40af"
           transparent
-          opacity={0.24}
+          opacity={0.32}
           blending={THREE.AdditiveBlending}
           depthWrite={false}
         />
       </lineSegments>
 
-      {/* 2. Highlighted Equator & Prime Meridian */}
+      {/* Highlighted Equator & Prime Meridian */}
       <lineSegments>
         <bufferGeometry>
           <bufferAttribute
@@ -290,13 +298,13 @@ const RealNeonEarth = ({ onHoverCity, onLeaveCity }) => {
         <lineBasicMaterial
           color="#38bdf8"
           transparent
-          opacity={0.42}
+          opacity={0.45}
           blending={THREE.AdditiveBlending}
           depthWrite={false}
         />
       </lineSegments>
 
-      {/* 3. Oceanic Particle Dust Mesh */}
+      {/* Oceanic Star Dust Mesh */}
       <points>
         <bufferGeometry>
           <bufferAttribute
@@ -307,18 +315,37 @@ const RealNeonEarth = ({ onHoverCity, onLeaveCity }) => {
           />
         </bufferGeometry>
         <pointsMaterial
-          size={0.045}
-          color="#818cf8"
+          size={0.04}
+          color="#60a5fa"
           map={starTexture}
           transparent
-          opacity={0.55}
+          opacity={0.5}
           blending={THREE.AdditiveBlending}
           depthWrite={false}
           sizeAttenuation
         />
       </points>
 
-      {/* 4. Real World Continent Coastlines (Vivid Neon Cyan) */}
+      {/* CONTINENTAL PLEXUS STRINGS (The dense triangulated glowing cyber mesh of continents from Image 1) */}
+      <lineSegments>
+        <bufferGeometry>
+          <bufferAttribute
+            attach="attributes-position"
+            count={plexusLinePositions.length / 3}
+            array={plexusLinePositions}
+            itemSize={3}
+          />
+        </bufferGeometry>
+        <lineBasicMaterial
+          color="#2563eb"
+          transparent
+          opacity={0.82}
+          blending={THREE.AdditiveBlending}
+          depthWrite={false}
+        />
+      </lineSegments>
+
+      {/* Real World Continent Coastlines (Vivid Electric Cyan Stroke) */}
       <lineSegments>
         <bufferGeometry>
           <bufferAttribute
@@ -331,13 +358,13 @@ const RealNeonEarth = ({ onHoverCity, onLeaveCity }) => {
         <lineBasicMaterial
           color="#38bdf8"
           transparent
-          opacity={0.92}
+          opacity={0.95}
           blending={THREE.AdditiveBlending}
           depthWrite={false}
         />
       </lineSegments>
 
-      {/* 5. Real World Country Borders (Delicate Neon Violet) */}
+      {/* Real World Country Borders (Delicate Electric Blue) */}
       <lineSegments>
         <bufferGeometry>
           <bufferAttribute
@@ -348,15 +375,15 @@ const RealNeonEarth = ({ onHoverCity, onLeaveCity }) => {
           />
         </bufferGeometry>
         <lineBasicMaterial
-          color="#a855f7"
+          color="#60a5fa"
           transparent
-          opacity={0.55}
+          opacity={0.45}
           blending={THREE.AdditiveBlending}
           depthWrite={false}
         />
       </lineSegments>
 
-      {/* 6. Global Parabolic Cyber Arcs / Strings */}
+      {/* Intercontinental Parabolic Cyber Arcs / Flight Strings */}
       <lineSegments>
         <bufferGeometry>
           <bufferAttribute
@@ -367,15 +394,37 @@ const RealNeonEarth = ({ onHoverCity, onLeaveCity }) => {
           />
         </bufferGeometry>
         <lineBasicMaterial
-          color="#c084fc"
+          color="#38bdf8"
           transparent
-          opacity={0.68}
+          opacity={0.7}
           blending={THREE.AdditiveBlending}
           depthWrite={false}
         />
       </lineSegments>
 
-      {/* 7. Global Tech Hub Beacon Stars */}
+      {/* Continental Plexus Nodes (Glowing Cyan/White Stars across all landmasses) */}
+      <points>
+        <bufferGeometry>
+          <bufferAttribute
+            attach="attributes-position"
+            count={plexusPointPositions.length / 3}
+            array={plexusPointPositions}
+            itemSize={3}
+          />
+        </bufferGeometry>
+        <pointsMaterial
+          size={0.045}
+          color="#7dd3fc"
+          map={starTexture}
+          transparent
+          alphaTest={0.01}
+          blending={THREE.AdditiveBlending}
+          depthWrite={false}
+          sizeAttenuation
+        />
+      </points>
+
+      {/* Global Tech Hub Major City Beacon Stars */}
       <points>
         <bufferGeometry>
           <bufferAttribute
@@ -392,7 +441,7 @@ const RealNeonEarth = ({ onHoverCity, onLeaveCity }) => {
           />
         </bufferGeometry>
         <pointsMaterial
-          size={0.12}
+          size={0.13}
           map={starTexture}
           vertexColors
           transparent
@@ -403,7 +452,7 @@ const RealNeonEarth = ({ onHoverCity, onLeaveCity }) => {
         />
       </points>
 
-      {/* 8. Animated Luminous Energy Packets gliding along cyber arcs */}
+      {/* Animated Luminous Energy Packets gliding along cyber flight arcs */}
       <points>
         <bufferGeometry ref={packetPointsRef}>
           <bufferAttribute
@@ -442,9 +491,9 @@ export const EarthCanvas = () => {
     <div className="w-full h-full relative flex items-center justify-center">
       {/* City Hover Tooltip Badge */}
       {hoveredCity && (
-        <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20 px-3 py-1.5 rounded-full bg-[#0a071e]/90 border border-[#38bdf8]/40 shadow-[0_0_20px_rgba(56,189,248,0.3)] backdrop-blur-md flex items-center gap-2 pointer-events-none transition-all duration-300">
+        <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20 px-3.5 py-1.5 rounded-full bg-[#03071e]/90 border border-[#38bdf8]/50 shadow-[0_0_25px_rgba(56,189,248,0.4)] backdrop-blur-md flex items-center gap-2 pointer-events-none transition-all duration-300">
           <span className="w-2 h-2 rounded-full bg-[#38bdf8] shadow-[0_0_8px_#38bdf8] animate-pulse" />
-          <span className="text-xs font-semibold tracking-wide text-white">
+          <span className="text-xs font-semibold tracking-wide text-white font-tech">
             {hoveredCity}
           </span>
         </div>
@@ -468,12 +517,12 @@ export const EarthCanvas = () => {
         className="w-full h-full cursor-grab active:cursor-grabbing select-none"
       >
         <Suspense fallback={null}>
-          {/* Smooth Click & Spin Controls with Momentum Inertia */}
+          {/* Smooth Click & Spin Controls: zoom disabled so mouse scroll moves the webpage naturally */}
           <OrbitControls
             autoRotate
             autoRotateSpeed={0.7}
             enableDamping
-            dampingFactor={0.06}
+            dampingFactor={0.05}
             enableZoom={false}
             maxPolarAngle={Math.PI / 2 + 0.35}
             minPolarAngle={Math.PI / 2 - 0.35}

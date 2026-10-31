@@ -103,14 +103,14 @@ export const Contact = () => {
             {/* Header */}
             <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-white/[0.08] pb-5">
               <div>
-                <p className="text-[11px] text-[#915EFF] font-mono uppercase tracking-widest font-semibold">
+                <p className="text-[11px] text-[#915EFF] font-tech uppercase tracking-widest font-semibold">
                   Get in touch
                 </p>
-                <h2 className="text-white font-bold text-2xl sm:text-3xl tracking-tight mt-0.5">
+                <h2 className="text-white font-bold text-2xl sm:text-3xl tracking-tight mt-0.5 font-display">
                   Let's collaborate.
                 </h2>
               </div>
-              <div className="flex items-center gap-3 text-xs text-gray-400">
+              <div className="flex items-center gap-3 text-xs text-gray-400 font-tech">
                 <a
                   href="mailto:abilashbhojan1803@gmail.com"
                   className="inline-flex items-center gap-1.5 hover:text-white transition-colors py-1 px-2.5 rounded-lg bg-white/[0.03] border border-white/[0.06]"
@@ -132,7 +132,7 @@ export const Contact = () => {
             <form ref={formRef} onSubmit={handleSubmit} className="mt-6 flex flex-col gap-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <label className="flex flex-col gap-1.5">
-                  <span className="text-[11px] font-medium uppercase tracking-wider text-gray-400">
+                  <span className="text-[11px] font-medium uppercase tracking-wider text-gray-400 font-tech">
                     Name
                   </span>
                   <input
@@ -142,12 +142,12 @@ export const Contact = () => {
                     onChange={handleChange}
                     placeholder="Your name"
                     required
-                    className="bg-white/[0.03] hover:bg-white/[0.05] border border-white/10 focus:border-[#915EFF] focus:ring-1 focus:ring-[#915EFF]/40 rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-gray-500 outline-none transition-all duration-200"
+                    className="bg-white/[0.03] hover:bg-white/[0.05] border border-white/10 focus:border-[#915EFF] focus:ring-1 focus:ring-[#915EFF]/40 rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-gray-500 outline-none transition-all duration-200 font-body"
                   />
                 </label>
 
                 <label className="flex flex-col gap-1.5">
-                  <span className="text-[11px] font-medium uppercase tracking-wider text-gray-400">
+                  <span className="text-[11px] font-medium uppercase tracking-wider text-gray-400 font-tech">
                     Email
                   </span>
                   <input
@@ -157,13 +157,13 @@ export const Contact = () => {
                     onChange={handleChange}
                     placeholder="you@example.com"
                     required
-                    className="bg-white/[0.03] hover:bg-white/[0.05] border border-white/10 focus:border-[#915EFF] focus:ring-1 focus:ring-[#915EFF]/40 rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-gray-500 outline-none transition-all duration-200"
+                    className="bg-white/[0.03] hover:bg-white/[0.05] border border-white/10 focus:border-[#915EFF] focus:ring-1 focus:ring-[#915EFF]/40 rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-gray-500 outline-none transition-all duration-200 font-body"
                   />
                 </label>
               </div>
 
               <label className="flex flex-col gap-1.5">
-                <span className="text-[11px] font-medium uppercase tracking-wider text-gray-400">
+                <span className="text-[11px] font-medium uppercase tracking-wider text-gray-400 font-tech">
                   Message
                 </span>
                 <textarea
@@ -173,14 +173,14 @@ export const Contact = () => {
                   onChange={handleChange}
                   placeholder="Tell me about your project or inquiry..."
                   required
-                  className="bg-white/[0.03] hover:bg-white/[0.05] border border-white/10 focus:border-[#915EFF] focus:ring-1 focus:ring-[#915EFF]/40 rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-gray-500 outline-none transition-all duration-200 resize-none"
+                  className="bg-white/[0.03] hover:bg-white/[0.05] border border-white/10 focus:border-[#915EFF] focus:ring-1 focus:ring-[#915EFF]/40 rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-gray-500 outline-none transition-all duration-200 resize-none font-body"
                 />
               </label>
 
               {/* Status Message */}
               {status.message && (
                 <div
-                  className={`p-3 rounded-xl flex items-center gap-2 text-xs ${
+                  className={`p-3 rounded-xl flex items-center gap-2 text-xs font-tech ${
                     status.type === 'success'
                       ? 'bg-[#00cea8]/15 border border-[#00cea8]/40 text-[#00cea8]'
                       : 'bg-red-500/15 border border-red-500/40 text-red-300'
@@ -199,7 +199,7 @@ export const Contact = () => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#915EFF] to-[#7c3aed] text-white text-sm font-medium shadow-[0_0_20px_rgba(145,94,255,0.25)] hover:shadow-[0_0_25px_rgba(145,94,255,0.4)] hover:scale-[1.01] active:scale-[0.98] transition-all duration-200 cursor-pointer disabled:opacity-50"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#915EFF] to-[#7c3aed] text-white text-sm font-medium font-tech tracking-wider uppercase shadow-[0_0_20px_rgba(145,94,255,0.25)] hover:shadow-[0_0_25px_rgba(145,94,255,0.4)] hover:scale-[1.01] active:scale-[0.98] transition-all duration-200 cursor-pointer disabled:opacity-50"
                 >
                   {loading ? (
                     <span>Sending...</span>

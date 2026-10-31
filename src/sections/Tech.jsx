@@ -145,16 +145,16 @@ export const Tech = () => {
           {/* Top Metadata Pill Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#100d25]/90 border border-[#915EFF]/40 backdrop-blur-md shadow-[0_0_20px_rgba(145,94,255,0.25)] mb-4">
             <Sparkles className="w-3.5 h-3.5 text-[#915EFF] animate-pulse" />
-            <span className="text-xs font-mono tracking-widest uppercase text-purple-200">
+            <span className="text-xs font-tech tracking-widest uppercase text-purple-200">
               System Architecture // Tech Matrix
             </span>
           </div>
 
-          <h2 className="text-white font-extrabold text-3xl sm:text-5xl md:text-6xl tracking-tight">
+          <h2 className="text-white font-extrabold text-3xl sm:text-5xl md:text-6xl tracking-tight font-display">
             Technological <span className="text-[#915EFF] purple-text-gradient">Stacks.</span>
           </h2>
 
-          <p className="mt-4 text-[#aaa6c3] text-sm sm:text-base max-w-2xl leading-relaxed">
+          <p className="mt-4 text-[#aaa6c3] text-sm sm:text-base max-w-2xl leading-relaxed font-body">
             A cohesive constellation of languages, reactive frontends, scalable backend engines, and database systems engineered for production performance.
           </p>
 
@@ -168,7 +168,7 @@ export const Tech = () => {
                 <button
                   key={cat.id}
                   onClick={() => setActiveTab(cat.id)}
-                  className={`relative flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all duration-300 cursor-pointer ${
+                  className={`relative flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-medium font-tech transition-all duration-300 cursor-pointer ${
                     isActive
                       ? 'text-white shadow-md'
                       : 'text-gray-400 hover:text-white hover:bg-white/[0.04]'

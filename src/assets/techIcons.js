@@ -34,7 +34,7 @@ export const techIcons = {
     name: 'Bootstrap',
     color: '#7952B3',
     bg: '#1b122c',
-    svg: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" rx="20" fill="#7952B3"/><text x="50" y="70" font-family="'Poppins', sans-serif" font-weight="900" font-size="62" fill="#FFFFFF" text-anchor="middle">B</text></svg>`
+    svg: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" rx="20" fill="#7952B3"/><text x="50" y="70" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="62" fill="#FFFFFF" text-anchor="middle">B</text></svg>`
   },
   nodejs: {
     name: 'Node.js',
@@ -46,7 +46,7 @@ export const techIcons = {
     name: 'Express',
     color: '#FFFFFF',
     bg: '#181818',
-    svg: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" rx="16" fill="#181818"/><text x="50" y="65" font-family="'Poppins', sans-serif" font-weight="800" font-size="44" fill="#FFFFFF" text-anchor="middle">ex</text></svg>`
+    svg: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" rx="16" fill="#181818"/><text x="50" y="65" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="44" fill="#FFFFFF" text-anchor="middle">ex</text></svg>`
   },
   mongodb: {
     name: 'MongoDB',
@@ -64,7 +64,7 @@ export const techIcons = {
     name: 'MySQL',
     color: '#00758F',
     bg: '#0f222b',
-    svg: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" rx="16" fill="#00758F"/><text x="50" y="46" font-family="'Poppins', sans-serif" font-weight="900" font-size="28" fill="#F29111" text-anchor="middle">MY</text><text x="50" y="74" font-family="'Poppins', sans-serif" font-weight="900" font-size="26" fill="#FFFFFF" text-anchor="middle">SQL</text></svg>`
+    svg: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" rx="16" fill="#00758F"/><text x="50" y="46" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="28" fill="#F29111" text-anchor="middle">MY</text><text x="50" y="74" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="26" fill="#FFFFFF" text-anchor="middle">SQL</text></svg>`
   },
   git: {
     name: 'Git',

@@ -17,7 +17,7 @@ export const Hero = () => {
 
             <div className="space-y-4 lg:space-y-6">
               {/* Name Heading: Hi, I'm Abilash B */}
-              <h1 className="font-black text-white lg:text-[74px] sm:text-[56px] xs:text-[46px] text-[36px] lg:leading-[88px] tracking-tight">
+              <h1 className="font-display font-black text-white lg:text-[76px] sm:text-[58px] xs:text-[46px] text-[36px] lg:leading-[90px] tracking-tight">
                 Hi, I'm{' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 drop-shadow-[0_0_25px_rgba(145,94,255,0.4)] whitespace-nowrap">
                   Abilash B
@@ -25,7 +25,7 @@ export const Hero = () => {
               </h1>
 
               {/* Subtitle / Bio */}
-              <p className="text-[#dfd9ff] font-medium lg:text-[24px] sm:text-[20px] xs:text-[17px] text-[15px] lg:leading-[36px] leading-relaxed max-w-xl">
+              <p className="text-[#dfd9ff] font-body font-normal lg:text-[21px] sm:text-[19px] xs:text-[17px] text-[15px] lg:leading-[34px] leading-relaxed max-w-xl tracking-normal">
                 I build bridges between imagination and reality.{' '}
                 <br className="hidden sm:block" />
                 My full stack development skills bring holistic solutions to complex digital problems.

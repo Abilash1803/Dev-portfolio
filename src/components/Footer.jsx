@@ -63,7 +63,7 @@ export const Footer = () => {
         </div>
 
         {/* Center Copyright & Attribution */}
-        <div className="text-center">
+        <div className="text-center font-tech">
           <p className="text-[#aaa6c3] text-[13px] sm:text-[14px]">
             &copy; 2026 Abilash B. All rights reserved.
           </p>

@@ -19,10 +19,10 @@ export const Experience = () => {
         transition={{ duration: 0.6 }}
         className="text-center"
       >
-        <p className="sm:text-[16px] text-[13px] text-[#aaa6c3] uppercase tracking-wider font-semibold">
+        <p className="sm:text-[14px] text-[12px] text-[#915EFF] font-tech uppercase tracking-widest font-semibold">
           WHAT I HAVE DONE SO FAR
         </p>
-        <h2 className="text-white font-black md:text-[54px] sm:text-[44px] xs:text-[34px] text-[28px] mt-1">
+        <h2 className="text-white font-display font-black md:text-[54px] sm:text-[44px] xs:text-[34px] text-[28px] mt-1 tracking-tight">
           Work <span className="text-[#915EFF] purple-text-gradient">Experience.</span>
         </h2>
       </motion.div>
