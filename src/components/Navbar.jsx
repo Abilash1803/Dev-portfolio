@@ -75,22 +75,22 @@ export const Navbar = () => {
           ))}
         </ul>
 
-        {/* Mobile Hamburger Toggle */}
-        <div className="sm:hidden flex flex-1 justify-end items-center">
+        {/* Mobile Hamburger Toggle (Visible on < 768px, matching desktop md:flex) */}
+        <div className="md:hidden flex flex-1 justify-end items-center">
           <button
             type="button"
             aria-label="Toggle menu"
-            className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-white cursor-pointer"
+            className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 hover:border-white/20 flex items-center justify-center text-white cursor-pointer active:scale-95 transition-transform duration-150"
             onClick={() => setToggle(!toggle)}
           >
             {toggle ? <X className="w-6 h-6 text-[#915EFF]" /> : <Menu className="w-6 h-6" />}
           </button>
 
-          {/* Mobile Dropdown Menu */}
+          {/* Mobile Dropdown Menu with physical origin-top-right expansion */}
           <div
             className={`${
               !toggle ? 'hidden opacity-0 scale-95' : 'flex opacity-100 scale-100'
-            } p-6 bg-[#100d25]/95 border border-white/15 backdrop-blur-xl absolute top-20 right-6 mx-4 my-2 min-w-[200px] z-50 rounded-2xl shadow-2xl transition-all duration-200 flex-col gap-4`}
+            } p-6 bg-[#100d25]/95 border border-white/15 backdrop-blur-xl absolute top-20 right-6 mx-4 my-2 min-w-[210px] z-50 rounded-2xl shadow-2xl origin-top-right transition-[opacity,transform] duration-200 ease-out flex-col gap-4`}
           >
             <ul className="list-none flex flex-col gap-4">
               {navLinks.map((link) => (
@@ -98,7 +98,7 @@ export const Navbar = () => {
                   key={link.id}
                   className={`${
                     active === link.title ? 'text-white font-bold' : 'text-[#aaa6c3]'
-                  } font-tech text-[16px] cursor-pointer hover:text-white transition-colors`}
+                  } font-tech text-[16px] cursor-pointer hover:text-white active:translate-x-1 transition-[color,transform] duration-150`}
                   onClick={() => {
                     setToggle(false);
                     setActive(link.title);

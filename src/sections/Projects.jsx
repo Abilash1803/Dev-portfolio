@@ -52,7 +52,7 @@ export const Projects = () => {
             >
               <TiltCard
                 options={{ max: 15, scale: 1.02, speed: 450 }}
-                className="bg-[#100d25] p-5 rounded-3xl w-full border border-white/10 hover:border-[#915EFF]/50 shadow-[0_10px_30px_rgba(0,0,0,0.7)] hover:shadow-[0_10px_35px_rgba(145,94,255,0.25)] transition-all duration-300 flex flex-col justify-between h-full"
+                className="bg-[#100d25] p-5 rounded-3xl w-full border border-white/10 hover:border-[#915EFF]/50 shadow-[0_10px_30px_rgba(0,0,0,0.7)] hover:shadow-[0_10px_35px_rgba(145,94,255,0.25)] transition-[border-color,box-shadow,transform] duration-300 ease-out flex flex-col justify-between h-full"
               >
                 <div>
                   {/* Image Container with Top-Right Floating Action Buttons */}
@@ -60,7 +60,7 @@ export const Projects = () => {
                     <img
                       src={project.image}
                       alt={project.title}
-                      className="w-full h-full object-cover rounded-2xl group-hover/img:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-cover rounded-2xl group-hover/img:scale-105 transition-transform duration-500 ease-out"
                     />
 
                     {/* Top Right Floating Action Icons */}
@@ -70,7 +70,7 @@ export const Projects = () => {
                         href={project.source_code_link}
                         target="_blank"
                         rel="noreferrer"
-                        className="w-9 h-9 rounded-full bg-[#050816]/90 border border-white/20 hover:border-[#915EFF] flex items-center justify-center text-white backdrop-blur-md shadow-md transition-all hover:scale-110 cursor-pointer"
+                        className="w-9 h-9 rounded-full bg-[#050816]/90 border border-white/20 hover:border-[#915EFF] flex items-center justify-center text-white backdrop-blur-md shadow-md transition-[transform,border-color,background-color] duration-150 ease-out hover:scale-110 active:scale-95 cursor-pointer"
                         title="View Source Code"
                       >
                         <GithubIcon className="w-4 h-4" />
@@ -82,7 +82,7 @@ export const Projects = () => {
                           href={project.live_link}
                           target="_blank"
                           rel="noreferrer"
-                          className="w-9 h-9 rounded-full bg-[#050816]/90 border border-white/20 hover:border-[#00cea8] flex items-center justify-center text-[#00cea8] backdrop-blur-md shadow-md transition-all hover:scale-110 cursor-pointer"
+                          className="w-9 h-9 rounded-full bg-[#050816]/90 border border-white/20 hover:border-[#00cea8] flex items-center justify-center text-[#00cea8] backdrop-blur-md shadow-md transition-[transform,border-color,background-color] duration-150 ease-out hover:scale-110 active:scale-95 cursor-pointer"
                           title="Open Live Website"
                         >
                           <ExternalLink className="w-4 h-4" />

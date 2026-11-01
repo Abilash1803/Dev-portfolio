@@ -142,7 +142,7 @@ export const Contact = () => {
                     onChange={handleChange}
                     placeholder="Your name"
                     required
-                    className="bg-white/[0.03] hover:bg-white/[0.05] border border-white/10 focus:border-[#915EFF] focus:ring-1 focus:ring-[#915EFF]/40 rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-gray-500 outline-none transition-all duration-200 font-body"
+                    className="bg-white/[0.03] hover:bg-white/[0.05] border border-white/10 focus:border-[#915EFF] focus:ring-1 focus:ring-[#915EFF]/40 rounded-xl px-4 py-2.5 text-base sm:text-sm text-white placeholder:text-gray-500 outline-none transition-[border-color,box-shadow,background-color] duration-200 ease-out font-body"
                   />
                 </label>
 
@@ -157,7 +157,7 @@ export const Contact = () => {
                     onChange={handleChange}
                     placeholder="you@example.com"
                     required
-                    className="bg-white/[0.03] hover:bg-white/[0.05] border border-white/10 focus:border-[#915EFF] focus:ring-1 focus:ring-[#915EFF]/40 rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-gray-500 outline-none transition-all duration-200 font-body"
+                    className="bg-white/[0.03] hover:bg-white/[0.05] border border-white/10 focus:border-[#915EFF] focus:ring-1 focus:ring-[#915EFF]/40 rounded-xl px-4 py-2.5 text-base sm:text-sm text-white placeholder:text-gray-500 outline-none transition-[border-color,box-shadow,background-color] duration-200 ease-out font-body"
                   />
                 </label>
               </div>
@@ -173,7 +173,7 @@ export const Contact = () => {
                   onChange={handleChange}
                   placeholder="Tell me about your project or inquiry..."
                   required
-                  className="bg-white/[0.03] hover:bg-white/[0.05] border border-white/10 focus:border-[#915EFF] focus:ring-1 focus:ring-[#915EFF]/40 rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-gray-500 outline-none transition-all duration-200 resize-none font-body"
+                  className="bg-white/[0.03] hover:bg-white/[0.05] border border-white/10 focus:border-[#915EFF] focus:ring-1 focus:ring-[#915EFF]/40 rounded-xl px-4 py-2.5 text-base sm:text-sm text-white placeholder:text-gray-500 outline-none transition-[border-color,box-shadow,background-color] duration-200 ease-out resize-none font-body"
                 />
               </label>
 

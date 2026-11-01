@@ -5,16 +5,28 @@ import { services } from '../data/tech';
 const ServiceCard = ({ service, index }) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
+  const handleMouseEnter = () => {
+    if (typeof window !== 'undefined' && window.matchMedia('(hover: hover)').matches) {
+      setIsFlipped(true);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (typeof window !== 'undefined' && window.matchMedia('(hover: hover)').matches) {
+      setIsFlipped(false);
+    }
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.6, delay: index * 0.12 }}
-      className="w-full [perspective:1000px] cursor-pointer group"
+      className="w-full [perspective:1000px] cursor-pointer group active:scale-[0.98] transition-transform duration-200 select-none"
       onClick={() => setIsFlipped((prev) => !prev)}
-      onMouseEnter={() => setIsFlipped(true)}
-      onMouseLeave={() => setIsFlipped(false)}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       {/* 3D Flipping Card Container */}
       <div

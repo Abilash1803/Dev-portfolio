@@ -168,7 +168,7 @@ export const Tech = () => {
                 <button
                   key={cat.id}
                   onClick={() => setActiveTab(cat.id)}
-                  className={`relative flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-medium font-tech transition-all duration-300 cursor-pointer ${
+                  className={`relative flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-medium font-tech active:scale-95 transition-[color,background-color,transform] duration-200 ease-out cursor-pointer ${
                     isActive
                       ? 'text-white shadow-md'
                       : 'text-gray-400 hover:text-white hover:bg-white/[0.04]'
@@ -226,7 +226,7 @@ export const Tech = () => {
                 >
                   {/* Holographic Glowing Backdrop Aura */}
                   <div
-                    className="absolute -inset-1 rounded-3xl opacity-0 group-hover:opacity-100 blur-xl transition-all duration-500 pointer-events-none"
+                    className="absolute -inset-1 rounded-3xl opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-300 pointer-events-none"
                     style={{
                       background: `radial-gradient(circle, ${meta.accent}50 0%, transparent 70%)`,
                     }}
@@ -246,7 +246,7 @@ export const Tech = () => {
 
                   {/* Holo-Glass Artifact Card */}
                   <div
-                    className={`relative w-full h-[180px] sm:h-[195px] rounded-2xl p-4 sm:p-5 flex flex-col justify-between items-center text-center transition-all duration-300 backdrop-blur-xl border overflow-hidden ${
+                    className={`relative w-full h-[180px] sm:h-[195px] rounded-2xl p-4 sm:p-5 flex flex-col justify-between items-center text-center transition-[transform,background-color,border-color,box-shadow] duration-200 ease-out active:scale-[0.98] backdrop-blur-xl border overflow-hidden ${
                       isHovered
                         ? 'bg-[#140e34]/90 border-white/50 -translate-y-2 shadow-[0_15px_35px_rgba(0,0,0,0.6)]'
                         : isConnected
@@ -271,14 +271,14 @@ export const Tech = () => {
                           {meta.category}
                         </span>
                       </span>
-                      <ArrowUpRight className="w-3 h-3 text-white/30 group-hover:text-white/90 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                      <ArrowUpRight className="w-3 h-3 text-white/30 group-hover:text-white/90 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200 ease-out" />
                     </div>
 
                     {/* Floating Holographic Pedestal & Brand Icon */}
                     <div className="relative my-auto flex flex-col items-center justify-center">
                       {/* Radial Icon Aura */}
                       <div
-                        className="absolute w-14 h-14 rounded-full blur-md opacity-25 group-hover:opacity-75 group-hover:scale-125 transition-all duration-300"
+                        className="absolute w-14 h-14 rounded-full blur-md opacity-25 group-hover:opacity-75 group-hover:scale-125 transition-[transform,opacity] duration-300 ease-out"
                         style={{ backgroundColor: meta.accent }}
                       />
 

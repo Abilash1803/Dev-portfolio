@@ -52,7 +52,7 @@ export const StarsCanvas = () => {
       <Canvas
         camera={{ position: [0, 0, 1] }}
         gl={{ antialias: false, alpha: true, powerPreference: 'high-performance' }}
-        dpr={[1, 2]}
+        dpr={[1, 1.5]}
       >
         <Suspense fallback={null}>
           <StarField />

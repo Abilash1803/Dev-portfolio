@@ -491,7 +491,7 @@ export const EarthCanvas = () => {
     <div className="w-full h-full relative flex items-center justify-center">
       {/* City Hover Tooltip Badge */}
       {hoveredCity && (
-        <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20 px-3.5 py-1.5 rounded-full bg-[#03071e]/90 border border-[#38bdf8]/50 shadow-[0_0_25px_rgba(56,189,248,0.4)] backdrop-blur-md flex items-center gap-2 pointer-events-none transition-all duration-300">
+        <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20 px-3.5 py-1.5 rounded-full bg-[#03071e]/90 border border-[#38bdf8]/50 shadow-[0_0_25px_rgba(56,189,248,0.4)] backdrop-blur-md flex items-center gap-2 pointer-events-none transition-[transform,opacity] duration-200 ease-out">
           <span className="w-2 h-2 rounded-full bg-[#38bdf8] shadow-[0_0_8px_#38bdf8] animate-pulse" />
           <span className="text-xs font-semibold tracking-wide text-white font-tech">
             {hoveredCity}
